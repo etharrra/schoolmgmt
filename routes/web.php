@@ -28,7 +28,7 @@ Route::group([
 
 	Route::resource('grade','GradeController');
 
-	Route::resource('class','ClassController');
+	Route::resource('room','RoomController');
 
 	Route::resource('timetable','TimetableController');
 

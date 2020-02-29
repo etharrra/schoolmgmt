@@ -17,13 +17,13 @@ class CreateTimetablesTable extends Migration
             $table->bigIncrements('id');
             $table->string('time_start');
             $table->string('time_finish');
-            $table->unsignedBigInteger('class_id');
+            $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('subject_id');
             $table->string('day');
             $table->timestamps();
 
-            $table->foreign('class_id')
-                  ->references('id')->on('classes')
+            $table->foreign('room_id')
+                  ->references('id')->on('rooms')
                   ->onDelete('cascade');
 
             $table->foreign('subject_id')

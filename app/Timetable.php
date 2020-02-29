@@ -8,7 +8,7 @@ class Timetable extends Model
 {
     protected $fillable = ['time_start',
 							'time_finish',
-							'class_id',
+							'room_id',
 							'subject_id',
 							'day'];
 }

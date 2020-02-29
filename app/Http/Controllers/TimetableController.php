@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Timetable;
+use App\Room;
+use App\Subject;
 
 class TimetableController extends Controller
 {
@@ -14,8 +16,8 @@ class TimetableController extends Controller
      */
     public function index()
     {
-        $timetable = Timetable::all();
-        return view('backend.timetable.index',compact('timetable'));
+        $timetables = Timetable::all();
+        return view('backend.timetable.index',compact('timetables'));
     }
 
     /**
@@ -25,7 +27,9 @@ class TimetableController extends Controller
      */
     public function create()
     {
-        return view('backend.timetable.create');
+        $rooms = Room::all();
+        $subjects = Subject::all();
+        return view('backend.timetable.create',compact('rooms','subjects'));
     }
 
     /**
@@ -36,6 +40,28 @@ class TimetableController extends Controller
      */
     public function store(Request $request)
     {
+        //validation
+
+        $request->validate([
+            "time_start" => 'required|min:3|max:191',
+            "time_finish" => 'required|min:3|max:191',
+            "day" => 'required|min:3|max:191',
+            "room_id" => 'required',
+            "subject_id" => 'required'
+        ]);
+        //dd($request);
+
+        //Upload if exist
+
+        //Store Data
+        $timetable = new Timetable;
+        $timetable->time_start = request('time_start');
+        $timetable->time_finish = request('time_finish');
+        $timetable->day = request('day');
+        $timetable->room_id = request('room_id');
+        $timetable->subject_id = request('subject_id');
+        $timetable->save();
+
         return redirect()->route('timetable.index');
     }
 
@@ -58,7 +84,10 @@ class TimetableController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.timetable.edit');
+        $timetable = Timetable::find($id);
+        $rooms = Room::all();
+        $subjects = Subject::all();
+        return view('backend.timetable.edit',compact('timetable','rooms','subjects'));
     }
 
     /**
@@ -70,6 +99,29 @@ class TimetableController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //validation
+
+        $request->validate([
+            "time_start" => 'required|min:3|max:191',
+            "time_finish" => 'required|min:3|max:191',
+            "day" => 'required|min:3|max:191',
+            "room_id" => 'required',
+            "subject_id" => 'required'
+        ]);
+        //dd($request);
+
+        //Upload if exist
+
+        //Store Data
+        $timetable = Timetable::find($id);
+        $timetable->time_start = request('time_start');
+        $timetable->time_finish = request('time_finish');
+        $timetable->day = request('day');
+        $timetable->room_id = request('room_id');
+        $timetable->subject_id = request('subject_id');
+        $timetable->save();
+
+        
         // Redirect
         return redirect()->route('timetable.index');
     }

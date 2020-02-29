@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subject;
+use App\Grade;
 
 
 class SubjectController extends Controller
@@ -15,8 +16,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subject = Subject::all();
-        return view('backend.subject.index',compact('subject'));
+
+        $subjects = Subject::all();
+        return view('backend.subject.index',compact('subjects'));
     }
 
     /**
@@ -26,7 +28,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('backend.subject.create');
+        $grades = Grade::all();
+        return view('backend.subject.create',compact('grades'));
     }
 
     /**
@@ -37,20 +40,24 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {   
-         // dd($request);
+         //dd($request);
 
         //validation
 
         $request->validate([
-            "subject" => 'required|min:3|max:191'
+            "subject" => 'required|min:3|max:191',
+            "grade_id" => 'required'
         ]);
 
         //Upload if exist
 
         //Store Data
         $subject = new Subject;
-        $subject->subject = request('subject');
+        $subject->name = request('subject');
         $subject->save();
+
+        //add_student_subject
+        $subject->grades()->attach(request('grade_id'));
 
          return redirect()->route('subject.index');
     }
@@ -74,7 +81,9 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.subject.edit');
+        $grades = Grade::all();
+        $subject = Subject::find($id);
+        return view('backend.subject.edit',compact('grades','subjects'));
     }
 
     /**

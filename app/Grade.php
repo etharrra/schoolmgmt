@@ -10,7 +10,13 @@ class Grade extends Model
 							'academicyear_id'];
 
 	public function academicyear($value='')
-		{
-			return $this->belongsTo('App\Academicyear');
-		}						
+	{
+		return $this->belongsTo('App\Academicyear');
+	}
+
+	public function subjects($value='')
+	{
+		return $this->belongsToMany('App\Subject')
+    				->withTimestamps();
+	}						
 }

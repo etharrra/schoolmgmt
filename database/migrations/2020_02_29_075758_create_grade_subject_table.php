@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGradesSubjectsTable extends Migration
+class CreateGradeSubjectTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGradesSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('grades_subjects', function (Blueprint $table) {
+        Schema::create('grade_subject', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('grade_id');
             $table->unsignedBigInteger('subject_id');
@@ -25,7 +25,7 @@ class CreateGradesSubjectsTable extends Migration
 
             $table->foreign('subject_id')
                   ->references('id')->on('subjects')
-                  ->onDelete('cascade');      
+                  ->onDelete('cascade'); 
         });
     }
 
@@ -36,6 +36,6 @@ class CreateGradesSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grades_subjects');
+        Schema::dropIfExists('grade_subject');
     }
 }

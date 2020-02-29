@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Class;
 
-class ClassController extends Controller
+use App\Room;
+
+use App\Grade;
+
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,8 @@ class ClassController extends Controller
      */
     public function index()
     {
-       return view('backend.class.index');
+        $rooms = Room::all();
+        return view('backend.room.index',compact('rooms'));
     }
 
     /**
@@ -24,7 +28,8 @@ class ClassController extends Controller
      */
     public function create()
     {
-        return view('backend.class.create');
+        $grades = Grade::all();
+        return view('backend.room.create',compact('grades'));
     }
 
     /**
@@ -35,7 +40,23 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('class.index');
+        //validation
+
+        $request->validate([
+            "name" => 'required|min:3|max:191',
+            "grade_id" => 'required'
+        ]);
+
+        //Upload if exist
+
+        //Store Data
+        $room = new Room;
+        $room->name = request('name');
+        $room->grade_id = request('grade_id');
+        $room->save();
+
+        // Redirect
+        return redirect()->route('room.index');
     }
 
     /**
@@ -46,8 +67,7 @@ class ClassController extends Controller
      */
     public function show($id)
     {
-        $class = Class::find($id);
-        return view('backend.class.show',compact('class'));
+        //
     }
 
     /**
@@ -58,8 +78,9 @@ class ClassController extends Controller
      */
     public function edit($id)
     {
-        $class = Class::find($id);
-        return view('backend.class.edit',compact('class'));
+        $grades = Grade::all();
+        $room = Room::find($id);
+        return view('backend.room.edit',compact('room','grades'));
     }
 
     /**
@@ -71,8 +92,21 @@ class ClassController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            "name" => 'required|min:3|max:191',
+            "grade_id" => 'required'
+        ]);
+
+        //Upload if exist
+
+        //Store Data
+        $room = Room::find($id);
+        $room->name = request('name');
+        $room->grade_id = request('grade_id');
+        $room->save();
+
         // Redirect
-        return redirect()->route('class.index');
+        return redirect()->route('room.index');
     }
 
     /**
@@ -83,9 +117,9 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
-        $class = Class::find($id);
-        $class->delete();
+        $room = Room::find($id);
+        $room->delete();
 
-        return redirect()->route('class.index');
+        return redirect()->route('room.index');
     }
 }

@@ -16,7 +16,9 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->text('avatar')->default('storage/default/avator.png');
             $table->string('phone');
+            $table->string('education');
             $table->text('address');
             $table->unsignedBigInteger('subject_id');
             $table->timestamps();

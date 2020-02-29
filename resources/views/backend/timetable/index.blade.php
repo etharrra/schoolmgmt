@@ -25,10 +25,14 @@
 					</thead>
 					<tbody>
 						@php $i = 1; @endphp
-						@foreach($timetable as $row)
+						@foreach($timetables as $row)
 						<tr>
 							<td class="text-center">{{$i++}}</td>
-							<td>{{$row->timetable}}</td>
+							<td>{{$row->time_start}}</td>
+							<td>{{$row->time_finish}}</td>
+							<td>{{$row->day}}</td>
+							<td>{{$row->room_id}}</td>
+							<td>{{$row->subject_id}}</td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">
 									<i class="material-icons">search</i>
