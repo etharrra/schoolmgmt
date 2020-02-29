@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Class;
 
 class ClassController extends Controller
 {
@@ -13,7 +14,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        //
+       return view('backend.class.index');
     }
 
     /**
@@ -23,7 +24,7 @@ class ClassController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.class.create');
     }
 
     /**
@@ -34,7 +35,7 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('class.index');
     }
 
     /**
@@ -45,7 +46,8 @@ class ClassController extends Controller
      */
     public function show($id)
     {
-        //
+        $class = Class::find($id);
+        return view('backend.class.show',compact('class'));
     }
 
     /**
@@ -56,7 +58,8 @@ class ClassController extends Controller
      */
     public function edit($id)
     {
-        //
+        $class = Class::find($id);
+        return view('backend.class.edit',compact('class'));
     }
 
     /**
@@ -68,7 +71,8 @@ class ClassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Redirect
+        return redirect()->route('class.index');
     }
 
     /**
@@ -79,6 +83,9 @@ class ClassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $class = Class::find($id);
+        $class->delete();
+
+        return redirect()->route('class.index');
     }
 }

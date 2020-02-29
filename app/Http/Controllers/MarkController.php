@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mark;
 
 class MarkController extends Controller
 {
@@ -13,7 +14,8 @@ class MarkController extends Controller
      */
     public function index()
     {
-        //
+        $mark = Mark::all();
+        return view('backend.mark.index',compact('mark'));
     }
 
     /**
@@ -23,7 +25,7 @@ class MarkController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.mark.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class MarkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('mark.index');
     }
 
     /**
@@ -56,7 +58,7 @@ class MarkController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.mark.edit');
     }
 
     /**
@@ -68,7 +70,8 @@ class MarkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         // Redirect
+        return redirect()->route('mark.index');
     }
 
     /**
@@ -79,6 +82,9 @@ class MarkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mark = Mark::find($id);
+        $mark->delete();
+
+        return redirect()->route('mark.index');
     }
 }

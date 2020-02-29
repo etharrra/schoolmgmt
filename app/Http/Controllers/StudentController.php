@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Student;
 
 class StudentController extends Controller
 {
@@ -13,7 +14,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $student = Student::all();
+        return view('backend.student.index',compact('student'));
     }
 
     /**
@@ -23,7 +25,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.student.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('student.index');
     }
 
     /**
@@ -45,7 +47,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student = Student::find($id);
+        return view('backend.student.show',compact('student'));
     }
 
     /**
@@ -56,7 +59,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.student.edit');
     }
 
     /**
@@ -68,7 +71,8 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Redirect
+        return redirect()->route('student.index');
     }
 
     /**
@@ -79,6 +83,9 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        $student->delete();
+
+        return redirect()->route('student.index');
     }
 }

@@ -25,6 +25,26 @@ Route::group([
 	Route::get('dashboard','BackendController@dashboard');
 
 	Route::resource('academicyear','AcademicyearController');
+
+	Route::resource('grade','GradeController');
+
+	Route::resource('class','ClassController');
+
+	Route::resource('timetable','TimetableController');
+
+	Route::resource('subject','SubjectController');
+
+	Route::resource('teacher','TeacherController');
+
+	Route::resource('guardian','GuardianController');
+
+	Route::resource('student','StudentController');
+
+	Route::resource('mark','MarkController');
+
+	Route::resource('attendance','AttendanceController');
+
+
 	
 });
 

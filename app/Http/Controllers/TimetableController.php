@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Timetable;
 
 class TimetableController extends Controller
 {
@@ -13,7 +14,8 @@ class TimetableController extends Controller
      */
     public function index()
     {
-        //
+        $timetable = Timetable::all();
+        return view('backend.timetable.index',compact('timetable'));
     }
 
     /**
@@ -23,7 +25,7 @@ class TimetableController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.timetable.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class TimetableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('timetable.index');
     }
 
     /**
@@ -56,7 +58,7 @@ class TimetableController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.timetable.edit');
     }
 
     /**
@@ -68,7 +70,8 @@ class TimetableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Redirect
+        return redirect()->route('timetable.index');
     }
 
     /**
@@ -79,6 +82,9 @@ class TimetableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $timetable = Timetable::find($id);
+        $timetable->delete();
+
+        return redirect()->route('timetable.index');
     }
 }
