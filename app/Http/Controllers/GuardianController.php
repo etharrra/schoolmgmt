@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Guardian;
 
 class GuardianController extends Controller
 {
@@ -13,7 +14,8 @@ class GuardianController extends Controller
      */
     public function index()
     {
-        //
+        $guardian = Guardian::all();
+        return view('backend.guardian.index',compact('guardian'));
     }
 
     /**
@@ -23,7 +25,7 @@ class GuardianController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.guardian.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class GuardianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('guardian.index');
     }
 
     /**
@@ -45,7 +47,8 @@ class GuardianController extends Controller
      */
     public function show($id)
     {
-        //
+        $guardian = Guardian::find($id);
+        return view('backend.guardian.show',compact('guardian'));
     }
 
     /**
@@ -56,7 +59,7 @@ class GuardianController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.guardian.edit');
     }
 
     /**
@@ -68,7 +71,8 @@ class GuardianController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Redirect
+        return redirect()->route('guardian.index');
     }
 
     /**
@@ -79,6 +83,9 @@ class GuardianController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $guardian = Guardian::find($id);
+        $guardian->delete();
+
+        return redirect()->route('guardian.index');
     }
 }

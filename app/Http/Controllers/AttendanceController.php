@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Attendance;
 
 class AttendanceController extends Controller
 {
@@ -13,7 +14,8 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $attendance = Attendance::all();
+        return view('backend.attendance.index',compact('attendance'));
     }
 
     /**
@@ -23,7 +25,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.attendance.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('attendance.index');
     }
 
     /**
@@ -56,7 +58,7 @@ class AttendanceController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.attendance.edit');
     }
 
     /**
@@ -68,7 +70,8 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Redirect
+        return redirect()->route('attendance.index');
     }
 
     /**
@@ -79,6 +82,9 @@ class AttendanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $attendance = Attendance::find($id);
+        $attendance->delete();
+
+        return redirect()->route('attendance.index');
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Subject;
+
 
 class SubjectController extends Controller
 {
@@ -13,7 +15,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subject = Subject::all();
+        return view('backend.subject.index',compact('subject'));
     }
 
     /**
@@ -23,7 +26,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.subject.create');
     }
 
     /**
@@ -33,8 +36,23 @@ class SubjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+         // dd($request);
+
+        //validation
+
+        $request->validate([
+            "subject" => 'required|min:3|max:191'
+        ]);
+
+        //Upload if exist
+
+        //Store Data
+        $subject = new Subject;
+        $subject->subject = request('subject');
+        $subject->save();
+
+         return redirect()->route('subject.index');
     }
 
     /**
@@ -56,7 +74,7 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('backend.subject.edit');
     }
 
     /**
@@ -68,7 +86,22 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+
+        //validation
+
+        $request->validate([
+            "subject" => 'required|min:3|max:191'
+        ]);
+
+        //Upload if exist
+
+        //Store Data
+        $subject = Subject::find($id);
+        $subject->subject = request('subject');
+        $subject->save();
+        // Redirect
+        return redirect()->route('subject.index');
     }
 
     /**
@@ -79,6 +112,9 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subject = Subject::find($id);
+        $subject->delete();
+
+        return redirect()->route('subject.index');
     }
 }
