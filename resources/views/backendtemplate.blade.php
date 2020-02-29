@@ -27,7 +27,7 @@ The above copyright notice and this permission notice shall be included in all c
   <!-- CSS Files -->
   <link href="{{ asset('backendtemplate/css/material-dashboard.css?v=2.1.2')}}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{{ asset('backendtemplate/demo/demo.css')}}" rel="stylesheet" />
+  <!-- <link href="{{ asset('backendtemplate/demo/demo.css')}}" rel="stylesheet" /> -->
 </head>
 
 <body class="">
