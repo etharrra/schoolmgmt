@@ -10,4 +10,8 @@ class Guardian extends Model
 							'phone',
 							'address'];
 
+	public function user($value='')
+	{
+		return $this->belongsTo('App\User');
+	}
 }

@@ -18,6 +18,7 @@ class CreateMarksTable extends Migration
             $table->integer('mark');
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('subject_id');
+            $table->string('month');
             $table->timestamps();
 
             $table->foreign('student_id')

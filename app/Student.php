@@ -11,6 +11,15 @@ class Student extends Model
 						   'phone',
 						   'dob',
 						   'address',
-						   'guardian_id',
+						   'user_id',
 						   'room_id'];
+
+	public function room($value='')
+	{
+		return $this->belongsTo('App\Room');
+	}
+	public function user($value='')
+	{
+		return $this->belongsTo('App\User');
+	}					   
 }

@@ -11,10 +11,11 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<form action="{{ route('timetable.store')}}" method="POST" enctype="multipart/form-data">
+				<form action="{{ route('teacher.store')}}" method="POST" enctype="multipart/form-data">
+
 					@csrf
 					<div class="form-group  ">
-						<label for="name" class="col-sm-2 col-form-label"> Name </label>
+						<label for="name" class="col-form-label"> Name </label>
 				    	
 				    	<div>
 				      		<input type="text" class="form-control" id="name"  name="name">
@@ -22,17 +23,16 @@
 				    	</div>
 					</div>
 					
-					<div class="form-group  ">
-						<label for="avatar" class="col-sm-2 col-form-label"> Click Here to Choose Photo	 </label>
+					<div class="form-group">
+						<label for="avatar" class="form-control-label"> Profile</label>
 				    	
 				    	<div>
-				      		<input type="file" id="avatar" name="avatar">
-				      		
+				      		<input type="file" id="avatar" name="avatar" class="form-control-file">	
 				    	</div>
 					</div>
 
 					<div class="form-group  ">
-						<label for="email" class="col-sm-2 col-form-label"> Email </label>
+						<label for="email" class=" col-form-label"> Email </label>
 				    	
 				    	<div>
 				      		<input type="email" name="email" class="form-control" id="email">
@@ -41,7 +41,7 @@
 					</div>
 
 					<div class="form-group  ">
-						<label for="phone" class="col-sm-2 col-form-label"> Phone </label>
+						<label for="phone" class=" col-form-label"> Phone </label>
 				    	
 				    	<div>
 				      		<input type="number" name="phone" class="form-control" id="phone" >
@@ -50,7 +50,7 @@
 					</div>
 
 					<div class="form-group  ">
-						<label for="degree" class="col-sm-2 col-form-label"> Education </label>
+						<label for="degree" class=" col-form-label"> Education </label>
 				    	
 				    	<div>
 				      		<input type="text" name="education" class="form-control">
@@ -61,7 +61,7 @@
 					
 
 					<div class="form-group  {{ $errors->has('address') ? ' has-error' : '' }}">
-						<label for="address" class="col-sm-2 col-form-label"> Address </label>
+						<label for="address" class=" col-form-label"> Address </label>
 				    	
 				    	<div>
 				      		<textarea class="form-control" name="address" id="address">
@@ -79,6 +79,14 @@
 							@endforeach
 						</select>
 					</div>
+
+					<div class="form-group">								
+						<select class="js-example-basic-multiple form-control" name="rooms[]" multiple="multiple">
+								@foreach($rooms as $row)
+								<option value="{{$row->id}}">{{$row->name}}</option>
+								@endforeach
+						</select>
+					</div>
 					<input type="submit" name="submit" value="submit" class="btn btn-primary">
 					
 					
@@ -86,4 +94,14 @@
 			</div>
 		</div>
 	</div>
+@endsection
+
+
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+    
+});
+</script>
 @endsection

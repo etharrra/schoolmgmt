@@ -21,12 +21,20 @@
 						<input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject" value="{{$subject->name}}">
 						
 					</div>
+					
 					<div class="form-group">
 						<label for="academicyear_id">Select Grade</label>
-						<select name="academicyear_id" id="academicyear_id" class="form-control">
-							@foreach($grades as $row)
-							<option value="{{$row->id}}" @if($subject->academicyear_id == $row->id) {{'selected'}}@endif>{{$row->academicyear}}</option>
-							@endforeach
+					@php
+						$v = $subject->grades;
+						
+					@endphp								
+						<select class="js-example-basic-multiple form-control" name="grades[]" multiple="multiple">
+								@foreach($grades as $row)
+								<option value="{{$row->id}}" @foreach($v as $key=> $value)
+								
+								@if($row->id==$value->pivot->grade_id) {{"selected"}} @endif 
+								@endforeach>{{$row->name}}</option>
+								@endforeach
 						</select>
 					</div>
 					<input type="submit" name="submit" value="Update" class="btn btn-primary">
@@ -36,4 +44,13 @@
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+    
+});
+</script>
 @endsection

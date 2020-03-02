@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mark;
+use App\Student;
+use App\Subject;
 
 class MarkController extends Controller
 {
@@ -25,7 +27,9 @@ class MarkController extends Controller
      */
     public function create()
     {
-        return view('backend.mark.create');
+        $students = Student::all();
+        $subjects = Subject::all();
+        return view('backend.mark.create',compact('students','subjects'));
     }
 
     /**
@@ -36,6 +40,22 @@ class MarkController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
+        // Validation
+        $request->validate([
+            "mark" => 'required|min:1|max:191',
+            "student_id" => 'required',
+            "subject_id" => 'required',
+            "month" => 'required'
+        ]);
+
+        $mark = new Mark;
+        $mark->mark = request('mark');
+        $mark->student_id = request('student_id');
+        $mark->subject_id = request('subject_id');
+        $mark->month = request('month');
+        $mark->save();
+
         return redirect()->route('mark.index');
     }
 
@@ -58,7 +78,10 @@ class MarkController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.mark.edit');
+        $students = Student::all();
+        $subjects = Subject::all();
+        $mark = Mark::find($id);
+        return view('backend.mark.edit',compact('students','subjects','mark'));
     }
 
     /**
@@ -70,6 +93,21 @@ class MarkController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request);
+        // Validation
+        $request->validate([
+            "mark" => 'required|min:1|max:191',
+            "student_id" => 'required',
+            "subject_id" => 'required',
+            "month" => 'required'
+        ]);
+
+        $mark = Mark::find($id);
+        $mark->mark = request('mark');
+        $mark->student_id = request('student_id');
+        $mark->subject_id = request('subject_id');
+        $mark->month = request('month');
+        $mark->save();
          // Redirect
         return redirect()->route('mark.index');
     }

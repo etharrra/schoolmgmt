@@ -15,9 +15,10 @@
 					<thead>
 						<tr>
 							<th class="text-center">No</th>
+							<th>Student</th>
+							<th>Subject</th>
+							<th>Month</th>
 							<th>Mark</th>
-							<th>Student_id</th>
-							<th>Subject_id</th>
 							<th class="text-right">Actions</th>
 						</tr>
 					</thead>
@@ -26,6 +27,9 @@
 						@foreach($mark as $row)
 						<tr>
 							<td class="text-center">{{$i++}}</td>
+							<td>{{$row->student->name}}</td>
+							<td>{{$row->subject->name}}</td>
+							<td>{{$row->month}}</td>
 							<td>{{$row->mark}}</td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">

@@ -17,19 +17,20 @@
 							<th class="text-center">No</th>
 							<th>Name</th>
 							<th>Phone</th>
-							<th>Date of birth</th>
-							<th>Address</th>
-							<th>Class_id</th>
-							<th>Guardian_id</th>
+							<th>Room</th>
+							<th>Guardian Name</th>
 							<th class="text-right">Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						@php $i = 1; @endphp
-						@foreach($student as $row)
+						@foreach($students as $row)
 						<tr>
 							<td class="text-center">{{$i++}}</td>
-							<td>{{$row->student}}</td>
+							<td>{{$row->name}}</td>
+							<td>{{$row->phone}}</td>
+							<td>{{$row->room->name}}</td>
+							<td>{{$row->user->name}}</td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">
 									<i class="material-icons">search</i>

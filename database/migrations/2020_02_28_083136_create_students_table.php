@@ -20,12 +20,12 @@ class CreateStudentsTable extends Migration
             $table->string('phone');
             $table->date('dob');
             $table->text('address');
-            $table->unsignedBigInteger('guardian_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('room_id');
             $table->timestamps();
 
-            $table->foreign('guardian_id')
-                  ->references('id')->on('guardians')
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
                   ->onDelete('cascade');
 
             $table->foreign('room_id')

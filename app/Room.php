@@ -10,7 +10,13 @@ class Room extends Model
 						  'grade_id'];
 
    public function grade($value='')
-		{
-			return $this->belongsTo('App\Grade');
-		}						  
+	{
+		return $this->belongsTo('App\Grade');
+	}
+
+	public function teachers($value='')
+	{
+		return $this->belongsToMany('App\Teacher')
+    				->withTimestamps();
+	}						  
 }

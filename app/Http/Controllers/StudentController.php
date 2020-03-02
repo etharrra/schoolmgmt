@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use App\Room;
+use App\User;
 
 class StudentController extends Controller
 {
@@ -14,8 +16,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $student = Student::all();
-        return view('backend.student.index',compact('student'));
+        $students = Student::all();
+        return view('backend.student.index',compact('students'));
     }
 
     /**
@@ -25,7 +27,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('backend.student.create');
+        $users = User::all();
+        $rooms = Room::all();
+        return view('backend.student.create',compact('rooms'));
     }
 
     /**
@@ -36,6 +40,39 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
+
+        // Validation
+        $request->validate([
+            "name" => 'required|min:5|max:191',
+            "avatar" => 'required|mimes:jpeg,jpg,png',
+            "phone" => 'required|min:9|max:191',
+            "dob" => 'required',
+            "address" => 'required|min:5|max:191',
+            "room_id" => 'required',
+            "user_id" => 'required'
+        ]);
+        // dd($request);
+
+        // Uploadfile id exits
+        if ($request->hasfile('avatar')) {
+            $avatar = $request->file('avatar');
+            $upload_dir = public_path().'/storage/student/';
+            $name = time().'.'.$avatar->getClientOriginalExtension();
+            $avatar->move($upload_dir,$name);
+            $path = '/storage/student/'.$name;
+        }
+
+        $student = new Student;
+        $student->name = request('name');
+        $student->avatar = $path;
+        $student->phone = request('phone');
+        $student->dob = request('dob');
+        $student->address = request('address');
+        $student->room_id = request('room_id');
+        $student->user_id = request('user_id');
+        $student->save();
+
         return redirect()->route('student.index');
     }
 
@@ -59,7 +96,9 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.student.edit');
+        $rooms = Room::all();
+        $student = Student::find($id);
+        return view('backend.student.edit',compact('student','rooms'));
     }
 
     /**
@@ -71,6 +110,38 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validation
+        $request->validate([
+            "name" => 'required|min:5|max:191',
+            "avatar" => 'required|mimes:jpeg,jpg,png',
+            "phone" => 'required|min:9|max:191',
+            "dob" => 'required',
+            "address" => 'required|min:5|max:191',
+            "room_id" => 'required',
+            "user_id" => 'required'
+        ]);
+        // dd($request);
+
+        // Uploadfile id exits
+        if ($request->hasfile('avatar')) {
+            $avatar = $request->file('avatar');
+            $upload_dir = public_path().'/storage/student/';
+            $name = time().'.'.$avatar->getClientOriginalExtension();
+            $avatar->move($upload_dir,$name);
+            $path = '/storage/student/'.$name;
+        }else{
+            $path = request('oldavatar');
+        }
+
+        $student = Student::find($id);
+        $student->name = request('name');
+        $student->avatar = $path;
+        $student->phone = request('phone');
+        $student->dob = request('dob');
+        $student->address = request('address');
+        $student->room_id = request('room_id');
+        $student->user_id = request('user_id');
+        $student->save();
         // Redirect
         return redirect()->route('student.index');
     }

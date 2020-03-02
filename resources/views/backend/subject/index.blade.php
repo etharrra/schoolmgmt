@@ -11,7 +11,7 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<table class="table">
+				<table class="table" id="dataTable">
 					<thead>
 						<tr>
 							<th class="text-center">No</th>
@@ -26,7 +26,15 @@
 						<tr>
 							<td class="text-center">{{$i++}}</td>
 							<td>{{$row->name}}</td>
-							<td></td>
+							@php
+								$v = $row->grades;
+							@endphp
+							<td>
+							@foreach($v as $key => $value)
+								<span class="badge badge-pill badge-secondary">
+								{{$value->name}},						</span>
+							@endforeach
+							</td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">
 									<i class="material-icons">search</i>

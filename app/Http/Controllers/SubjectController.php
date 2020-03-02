@@ -16,9 +16,9 @@ class SubjectController extends Controller
      */
     public function index()
     {
-
+        $grades = Grade::all();
         $subjects = Subject::all();
-        return view('backend.subject.index',compact('subjects'));
+        return view('backend.subject.index',compact('subjects','grades'));
     }
 
     /**
@@ -40,14 +40,15 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {   
-         //dd($request);
+         // dd($request);
 
         //validation
 
         $request->validate([
             "subject" => 'required|min:3|max:191',
-            "grade_id" => 'required'
+            "grades" => 'required'
         ]);
+        //dd($request);
 
         //Upload if exist
 
@@ -57,7 +58,7 @@ class SubjectController extends Controller
         $subject->save();
 
         //add_student_subject
-        $subject->grades()->attach(request('grade_id'));
+        $subject->grades()->attach(request('grades'));
 
          return redirect()->route('subject.index');
     }
@@ -83,7 +84,7 @@ class SubjectController extends Controller
     {
         $grades = Grade::all();
         $subject = Subject::find($id);
-        return view('backend.subject.edit',compact('grades','subjects'));
+        return view('backend.subject.edit',compact('grades','subject'));
     }
 
     /**
@@ -95,22 +96,32 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
+        //dd($request);
 
-        //validation
+         //validation
 
         $request->validate([
-            "subject" => 'required|min:3|max:191'
+            "subject" => 'required|min:3|max:191',
+            "grades" => 'required'
         ]);
+        //dd($request);
 
         //Upload if exist
 
         //Store Data
         $subject = Subject::find($id);
-        $subject->subject = request('subject');
+        $subject->name = request('subject');
         $subject->save();
-        // Redirect
-        return redirect()->route('subject.index');
+     
+        foreach ($subject->grades as $key => $value) {
+            $v = $value->pivot->grade_id;
+             
+        }
+        dd($v);
+        //add_student_subject
+       $subject->grades()->updateExistingPivot($subject->grades->pivot,request('grades'));
+
+       
     }
 
     /**

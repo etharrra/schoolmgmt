@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Teacher;
 use App\Subject;
+use App\User;
+use App\Room;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
@@ -26,8 +29,9 @@ class TeacherController extends Controller
      */
     public function create()
     {
+        $rooms = Room::all();
         $subjects = Subject::all();
-        return view('backend.teacher.create',compact('subjects'));
+        return view('backend.teacher.create',compact('subjects','rooms'));
     }
 
     /**
@@ -38,7 +42,54 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-         return redirect()->route('teacher.index');
+
+        //validation
+
+        $request->validate([
+            "name" => 'required|min:3|max:191',
+            "avatar" => 'required|mimes:jpeg,jpg,png',
+            "email" => 'required',
+            "phone" => 'required|min:9|max:191',
+            "education" => 'required|min:3|max:191',
+            "address" => 'required|min:5|max:191',
+            "subject_id" => 'required',
+            "rooms" => 'required'
+        ]);
+        //dd($request);
+
+        // Uploadfile id exits
+        if ($request->hasfile('avatar')) {
+            $avatar = $request->file('avatar');
+            $upload_dir = public_path().'/storage/teacher/';
+            $name = time().'.'.$avatar->getClientOriginalExtension();
+            $avatar->move($upload_dir,$name);
+            $path = '/storage/teacher/'.$name;
+        }
+
+         //Store Data
+        $user = new User;
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = Hash::make('12345678');
+        $user->save();
+
+        $user->assignRole('Teacher');
+
+        $teacher = new Teacher;
+
+        $teacher->user_id = $user->id;
+        $teacher->avatar = $path;
+        $teacher->phone = request('phone');
+        $teacher->education = request('education');
+        $teacher->address = request('address');
+        $teacher->subject_id = request('subject_id');
+        $teacher->save();
+
+        $teacher->rooms()->attach(request('rooms'));
+
+        // Redirect
+        
+        return redirect()->route('teacher.index');
     }
 
     /**
@@ -49,8 +100,8 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $teacher = Teacher::find($id);
-        return view('backend.teacher.show',compact('teacher'));
+        $teacher = Teacher::findOrFail($id);
+        return response()->json($teacher);
     }
 
     /**
@@ -61,7 +112,10 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.teacher.edit');
+        $teacher = Teacher::find($id);
+        $subjects = Subject::all();
+        $rooms = Room::all();
+        return view('backend.teacher.edit',compact('teacher','subjects','rooms'));
     }
 
     /**

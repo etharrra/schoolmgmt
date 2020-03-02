@@ -21,13 +21,11 @@
 						<input type="text" class="form-control" id="subject" name="subject" placeholder="Enter Subject">
 						
 					</div>
-					<div class="form-group">
-						<label for="grade_id">Select Grade</label>
-						<select name="grade_id" id="grade_id" class="form-control">
-							<option><---Select Grade---></option>
-							@foreach($grades as $row)
-							<option value="{{$row->id}}">{{$row->name}}</option>
-							@endforeach
+					<div class="form-group">								
+						<select class="js-example-basic-multiple form-control" name="grades[]" multiple="multiple">
+								@foreach($grades as $row)
+								<option value="{{$row->id}}">{{$row->name}}</option>
+								@endforeach
 						</select>
 					</div>
 					<input type="submit" name="submit" value="submit" class="btn btn-primary">
@@ -37,4 +35,13 @@
 			</div>
 		</div>
 	</div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+    
+});
+</script>
 @endsection
