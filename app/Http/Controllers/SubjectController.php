@@ -71,7 +71,8 @@ class SubjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $subject = Subject::find($id);
+        return view('backend.subject.show',compact('subject'));
     }
 
     /**

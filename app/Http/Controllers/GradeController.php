@@ -67,7 +67,8 @@ class GradeController extends Controller
      */
     public function show($id)
     {
-        //
+        $grade = Grade::find($id);
+        return view('backend.grade.show',compact('grade'));
     }
 
     /**

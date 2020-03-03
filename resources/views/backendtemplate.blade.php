@@ -33,7 +33,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -65,14 +65,14 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>20.Feb.2020:</span>
+          <span>1.March.2020:</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">20.Feb.2020:</h6>
-            <a class="collapse-item" href="">Coures</a>
-            <a class="collapse-item" href="">Subject</a>
-            <a class="collapse-item" href="">Degree</a>
+            <h6 class="collapse-header">1.March.2020:</h6>
+            <a class="collapse-item" href="{{route('academicyear.index')}}">Academic Year</a>
+            <a class="collapse-item" href="{{route('attendance.index')}}">Attendance</a>
+            <a class="collapse-item" href="{{route('grade.index')}}">Grade</a>
           </div>
         </div>
       </li>
@@ -81,15 +81,15 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>21.Feb.2020</span>
+          <span>2.March.2020</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">21.Feb.2020:</h6>
-            <a class="collapse-item" href="">Batch</a>
-            <a class="collapse-item" href="">Trainer</a>
-            <a class="collapse-item" href="">Mentor</a>
-            <a class="collapse-item" href="">Other</a>
+            <h6 class="collapse-header">2.March.2020:</h6>
+            <a class="collapse-item" href="{{route('guardian.index')}}">Guardian</a>
+            <a class="collapse-item" href="{{route('mark.index')}}">Mark</a>
+            <a class="collapse-item" href="{{route('room.index')}}">Room</a>
+            <a class="collapse-item" href="{{route('student.index')}}">Student</a>
           </div>
         </div>
       </li>
@@ -98,13 +98,14 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities1" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>21.Feb.2020</span>
+          <span>3.March.2020</span>
         </a>
         <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">24.Feb.2020:</h6>
-            <a class="collapse-item" href="">Student</a>
-            <a class="collapse-item" href="">Group</a>
+            <h6 class="collapse-header">3.March.2020:</h6>
+            <a class="collapse-item" href="{{route('subject.index')}}">Subject</a>
+            <a class="collapse-item" href="{{route('teacher.index')}}">Teacher</a>
+            <a class="collapse-item" href="{{route('timetable.index')}}">Timetable</a>
           </div>
         </div>
       </li>

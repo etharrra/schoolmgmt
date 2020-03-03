@@ -73,7 +73,8 @@ class TimetableController extends Controller
      */
     public function show($id)
     {
-        //
+         $timetable = Timetable::find($id);
+        return view('backend.timetable.show',compact('timetable'));
     }
 
     /**
