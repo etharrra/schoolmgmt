@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Timetable;
 use App\Room;
 use App\Subject;
+use App\Grade;
 
 class TimetableController extends Controller
 {
@@ -27,9 +28,10 @@ class TimetableController extends Controller
      */
     public function create()
     {
+        $grades = Grade::all();
         $rooms = Room::all();
         $subjects = Subject::all();
-        return view('backend.timetable.create',compact('rooms','subjects'));
+        return view('backend.timetable.create',compact('rooms','subjects','grades'));
     }
 
     /**
@@ -40,16 +42,17 @@ class TimetableController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         //validation
 
         $request->validate([
-            "time_start" => 'required|min:3|max:191',
-            "time_finish" => 'required|min:3|max:191',
-            "day" => 'required|min:3|max:191',
+            "time_start" => 'required',
+            "time_finish" => 'required',
+            "day" => 'required',
             "room_id" => 'required',
             "subject_id" => 'required'
         ]);
-        //dd($request);
+        // dd($request);
 
         //Upload if exist
 
@@ -84,10 +87,11 @@ class TimetableController extends Controller
      */
     public function edit($id)
     {
+        $grades = Grade::all();
         $timetable = Timetable::find($id);
         $rooms = Room::all();
         $subjects = Subject::all();
-        return view('backend.timetable.edit',compact('timetable','rooms','subjects'));
+        return view('backend.timetable.edit',compact('timetable','rooms','subjects','grades'));
     }
 
     /**
@@ -99,16 +103,17 @@ class TimetableController extends Controller
      */
     public function update(Request $request, $id)
     {
+         // dd($request);
         //validation
 
         $request->validate([
-            "time_start" => 'required|min:3|max:191',
-            "time_finish" => 'required|min:3|max:191',
-            "day" => 'required|min:3|max:191',
+            "time_start" => 'required',
+            "time_finish" => 'required',
+            "day" => 'required',
             "room_id" => 'required',
             "subject_id" => 'required'
         ]);
-        //dd($request);
+        // dd($request);
 
         //Upload if exist
 
@@ -121,8 +126,6 @@ class TimetableController extends Controller
         $timetable->subject_id = request('subject_id');
         $timetable->save();
 
-        
-        // Redirect
         return redirect()->route('timetable.index');
     }
 

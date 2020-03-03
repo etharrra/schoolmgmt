@@ -30,7 +30,6 @@
                                          <th class="text-center">No</th>
                                          <th>Name</th>
                                          <th>Phone</th>
-                                         <th>Address</th>
                                          <th>Subject</th>
                                          <th class="text-right">Actions</th>
                                      </tr>
@@ -42,11 +41,19 @@
                                          <td class="text-center">{{$i++}}</td>
                                          <td>{{$row->user->name}}</td>
                                          <td>{{$row->phone}}</td>
-                                         <td>{{$row->address}}</td>
                                          <td>{{$row->subject->name}}</td>
                                          <td class="td-actions text-right">
 
-                                            <a href="#" class="btn btn-info detail" data-id="{{$row->id}}" data-name="{{$row->user->name}}" data-email="{{$row->user->email}}" data-avatar="{{$row->avatar}}" data-phone="{{$row->phone}}" data-education="{{$row->education}}" data-address="{{$row->address}}" data-subject="{{$row->subject->name}}">
+                                            <a href="#" class="btn btn-info detail" data-id="{{$row->id}}" data-name="{{$row->user->name}}" data-email="{{$row->user->email}}" data-avatar="{{$row->avatar}}" data-phone="{{$row->phone}}" data-education="{{$row->education}}" data-address="{{$row->address}}" data-subject="{{$row->subject->name}}"
+                                              data-rooms="
+                                              @php
+                                              $v = $row->rooms;
+                                              @endphp
+                                              @foreach($v as $key => $value)
+                                              <span class='badge badge-pill badge-primary'>
+                                                {{$value->name}},           </span>
+                                                @endforeach">
+
                                                <i class="fas fa-search"></i>
                                             </a>
 
@@ -71,7 +78,6 @@
                                          <th class="text-center">No</th>
                                          <th>Name</th>
                                          <th>Phone</th>
-                                         <th>Address</th>
                                          <th>Subject</th>
                                          <th class="text-right">Actions</th>
                                      </tr>
@@ -127,8 +133,9 @@
                 var education = $(this).data('education');
                 var address = $(this).data('address');
                 var subject = $(this).data('subject');
+                var rooms = $(this).data('rooms')
                 var modalbox = `
-                		<table class="table table-bordered">
+                		<table class="table table-borderless">
     						<tr>
     							<td rowspan="2">
     								<img src="${avatar}" class="img-fluid d-block rounded-circle">
@@ -158,7 +165,7 @@
     						</tr>
     						<tr>
     							<td>${address}</td>
-    							<td colspan="2"></td>
+    							<td colspan="2">${rooms}</td>
     						</tr>
     					</table>`;
 

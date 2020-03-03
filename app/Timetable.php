@@ -11,4 +11,13 @@ class Timetable extends Model
 							'room_id',
 							'subject_id',
 							'day'];
+
+	public function subject($value='')
+	{
+		return $this->belongsTo('App\Subject');
+	}
+	public function room($value='')
+	{
+		return $this->belongsTo('App\Room');
+	}
 }

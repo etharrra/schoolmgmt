@@ -70,21 +70,26 @@
 				      		
 				    	</div>
 				    </div>
-					<div class="form-group">
-						<label for="subject_id">Select Subject</label>
-						<select name="subject_id" id="subject_id" class="form-control">
-							<option><---Select Subject---></option>
-							@foreach($subjects as $row)
-							<option value="{{$row->id}}">{{$row->name}}</option>
+				    <div class="form-group">
+						<label for="grade">Select Grade</label>
+						<select name="grade" id="grade" class="form-control">
+							<option selected=""><---Select Grade---></option>
+							@foreach($grades as $grade)
+							<option value="{{$grade->id}}" data-id="{{$grade->id}}">{{$grade->name}}</option>
 							@endforeach
 						</select>
 					</div>
+					<div class="form-group">
+						<label for="subject_id">Select Subject</label>
+						<select name="subject_id" id="subject_id" class="form-control">
+							
+						</select>
+					</div>
 
-					<div class="form-group">								
-						<select class="js-example-basic-multiple form-control" name="rooms[]" multiple="multiple">
-								@foreach($rooms as $row)
-								<option value="{{$row->id}}">{{$row->name}}</option>
-								@endforeach
+					<div class="form-group">
+						<label class="form-control-label" for="room">Select Room</label>						
+						<select class="js-example-basic-multiple form-control" id="room" name="rooms[]" multiple="multiple">
+								
 						</select>
 					</div>
 					<input type="submit" name="submit" value="submit" class="btn btn-primary">
@@ -101,6 +106,39 @@
 <script type="text/javascript">
 	$(document).ready(function() {
     $('.js-example-basic-multiple').select2();
+    	$('#grade').change(
+   		function() {
+   			// alert("ok");
+   			var id = $( 'option:selected', this ).data( 'id' );
+   			//alert(id);
+   			$.get('/getroom/'+id, function(res) {
+   				$room = res;
+   				var html;
+   				$.each($room, function(i, v) {
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var rname = v.name;
+   					var rid = v.id;
+   					html += `<option value="${rid}">${rname}</option>`;
+
+   				});
+   				$('#room').html(html);
+   			});
+
+   			$.get('/getsubject/'+id, function(res) {
+   				$subject = res;
+   				var html;
+   				$.each($subject, function(i, v) {
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var sname = v.subname;
+   					var sid = v.subject_id;
+   					html += `<option value="${sid}">${sname}</option>`;
+
+   				});
+   				$('#subject_id').html(html);
+   			});
+   		});
     
 });
 </script>

@@ -28,10 +28,11 @@
 							<td>{{$row->name}}</td>
 							@php
 								$v = $row->grades;
+
 							@endphp
 							<td>
 							@foreach($v as $key => $value)
-								<span class="badge badge-pill badge-secondary">
+								<span class="badge badge-pill badge-primary">
 								{{$value->name}},						</span>
 							@endforeach
 							</td>

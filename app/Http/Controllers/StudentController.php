@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Student;
 use App\Room;
 use App\User;
+use App\Grade;
 
 class StudentController extends Controller
 {
@@ -29,7 +30,8 @@ class StudentController extends Controller
     {
         $users = User::all();
         $rooms = Room::all();
-        return view('backend.student.create',compact('rooms'));
+        $grades  = Grade::all();
+        return view('backend.student.create',compact('rooms','grades'));
     }
 
     /**
@@ -40,7 +42,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        //dd($request);
 
         // Validation
         $request->validate([
@@ -96,9 +98,11 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
+        $grades = Grade::all();
         $rooms = Room::all();
         $student = Student::find($id);
-        return view('backend.student.edit',compact('student','rooms'));
+        $users = User::all();
+        return view('backend.student.edit',compact('student','rooms','users','grades'));
     }
 
     /**
@@ -110,17 +114,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
         // Validation
         $request->validate([
             "name" => 'required|min:5|max:191',
-            "avatar" => 'required|mimes:jpeg,jpg,png',
+            "avatar" => 'sometimes|mimes:jpeg,jpg,png',
             "phone" => 'required|min:9|max:191',
             "dob" => 'required',
             "address" => 'required|min:5|max:191',
             "room_id" => 'required',
             "user_id" => 'required'
         ]);
-        // dd($request);
+         // dd($request);
 
         // Uploadfile id exits
         if ($request->hasfile('avatar')) {

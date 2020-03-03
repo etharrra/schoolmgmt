@@ -10,4 +10,9 @@ class Attendance extends Model
 							'status',
 							'description',
 							'student_id'];
+
+	public function student($value='')
+	{
+		return $this->belongsTo('App\Student');
+	}						
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Attendance;
+use App\Grade;
+use App\Room;
+use App\Student;
 
 class AttendanceController extends Controller
 {
@@ -12,6 +15,7 @@ class AttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $attendance = Attendance::all();
@@ -25,7 +29,10 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        return view('backend.attendance.create');
+        $grades = Grade::all();
+        $rooms = Room::all();
+        $students = Student::all();
+        return view('backend.attendance.create',compact('grades','rooms','students'));
     }
 
     /**
@@ -36,6 +43,22 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
+        $request->validate([
+            "date" => 'required',
+            "status" => 'required',
+            "student" => 'required',
+            "description" => 'sometimes'
+        ]);
+        //dd($request);
+        // Store
+        $attendance = new Attendance;
+        $attendance->date = request('date');
+        $attendance->status = request('status');
+        $attendance->student_id = request('student');
+        $attendance->description = request('description');
+        $attendance->save();
+
         return redirect()->route('attendance.index');
     }
 
@@ -58,7 +81,11 @@ class AttendanceController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.attendance.edit');
+        $grades = Grade::all();
+        $rooms = Room::all();
+        $students = Student::all();
+        $attendance = Attendance::find($id);
+        return view('backend.attendance.edit',compact('attendance','grades','rooms','students'));
     }
 
     /**
@@ -70,6 +97,23 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
+        $request->validate([
+            "date" => 'required',
+            "status" => 'required',
+            "student" => 'required',
+            "description" => 'sometimes'
+        ]);
+
+        dd($request);
+        // Store
+        $attendance = Attendance::find($id);
+        $attendance->date = request('date');
+        $attendance->status = request('status');
+        $attendance->student_id = request('student');
+        $attendance->description = request('description');
+        $attendance->save();
+
         // Redirect
         return redirect()->route('attendance.index');
     }
