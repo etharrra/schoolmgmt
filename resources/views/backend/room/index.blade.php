@@ -20,6 +20,7 @@
 							<th class="text-center">No</th>
 							<th>Room</th>
 							<th>Grade</th>
+							<th>Schedule</th>
 							<th class="text-right">Actions</th>
 						</tr>
 					</thead>
@@ -30,6 +31,7 @@
 							<td class="text-center">{{$i++}}</td>
 							<td>{{$row->name}}</td>
 							<td>{{$row->grade->name}}</td>
+							<td><a href="">View Schedule</a></td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">
 									<i class="material-icons">search</i>
@@ -56,6 +58,7 @@
 							<th class="text-center">No</th>
 							<th>Room</th>
 							<th>Grade</th>
+							<th>Schedule</th>
 							<th class="text-right">Actions</th>
 						</tr>
 					</tfoot>

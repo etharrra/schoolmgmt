@@ -197,18 +197,18 @@
           <p class="text-center">There are many tecahers in our school.Among them, they are our lovely class teacher.</p>
         </div>
       </div>
-      <div class="row mt-5 pt-5">
-        <div class="col-lg-3 col-md-6 col-sm-12 mt-5 order-lg-1 order-md-1 order-sm-1">
-          <div class="card img-fluid">
-            <img class="card-img-top" src="img/gd.jpg" alt="Card image" style="width:100%">
-            <div class="card-img-overlay">
-              <h4 class="card-title px-3 py-1 text-center">G Dragon</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      <!-- <div class="row mt-5 pt-5"> -->
+        <!-- <div class="col-lg-3 col-md-6 col-sm-12 mt-5 order-lg-1 order-md-1 order-sm-1"> -->
+          <!-- <div class="card img-fluid"> -->
+            <!-- <img class="card-img-top" src="img/gd.jpg" alt="Card image" style="width:100%"> -->
+            <!-- <div class="card-img-overlay"> -->
+              <!-- <h4 class="card-title px-3 py-1 text-center">G Dragon</h4> -->
+            <!-- </div> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
 
   <div class="container" id="contact">
     <div class="container-fluid mt-5">
@@ -248,7 +248,7 @@
       <div class="container-fluid mt-5">
         <div class="row">
           <div class="col-lg-6 col-md-12 col-sm-12">
-            <form>
+            <form action="" method="POST" enctype="multipart/form-data">
               <div class="form-group">
                 <input type="text" name="name" placeholder="Your Name" class="form-control">
               </div>
@@ -259,7 +259,7 @@
                 <input type="text" name="subjet" placeholder="Subject" class="form-control">
               </div>
               <div class="form-group">
-                <textarea class="form-control" rows="5" name="comment"></textarea>
+                <textarea class="form-control" rows="5" name="comment">Message</textarea>
               </div>
               <br>
               <div class="mt-1 mb-2">

@@ -15,8 +15,8 @@ class CreateTimetablesTable extends Migration
     {
         Schema::create('timetables', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('time_start');
-            $table->string('time_finish');
+            $table->time('time_start');
+            $table->time('time_finish');
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('subject_id');
             $table->string('day');

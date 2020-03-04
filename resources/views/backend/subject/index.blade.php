@@ -31,15 +31,20 @@
 							<td class="text-center">{{$i++}}</td>
 							<td>{{$row->name}}</td>
 							@php
+
 							$v = $row->grades;
 							@endphp
 							<td>
 								@foreach($v as $key => $value)
 								<span class="badge badge-pill badge-secondary">
-									{{$value->name}},						</span>
-									@endforeach
-								</td>
-								<td class="td-actions text-right">
+									{{$value->name}},						
+								</span>
+								@endforeach
+							</td>
+								
+							
+							<td class="td-actions text-right">
+
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">
 									<i class="material-icons">search</i>
 								</button> -->

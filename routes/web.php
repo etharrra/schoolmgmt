@@ -43,6 +43,8 @@ Route::group([
 	Route::resource('mark','MarkController');
 
 	Route::resource('attendance','AttendanceController');
+	
+	Route::resource('contact','ContactController');
 
 
 	
@@ -55,3 +57,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+Route::get('/getroom/{id}','AjaxController@getroom')->name('getroom');
+
+Route::get('/getstudent/{id}','AjaxController@getstudent')->name('getstudent');
+
+Route::get('/getguardian/{email}','AjaxController@getguardian')->name('getguardian');
+
+Route::get('/getsubject/{id}','AjaxController@getsubject')->name('getsubject');

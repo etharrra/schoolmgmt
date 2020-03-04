@@ -73,29 +73,100 @@
 								@enderror				      		
 							</div>
 						</div>
+						
 
-						<div class="form-group">
-							<label for="room_id">Room</label>
-							<div>
-								<select class="form-control" name="room_id" id="room_id">
-									@foreach($rooms as $row)
-									<option value="{{$row->id}}">{{$row->name}}</option>
-									@endforeach
-								</select>
-							</div>		
-						</div>
-						<div class="form-group">
-							<label for="room_id">Guardian</label>
-							<div>
-								<input type="text" name="user_id" value="8">
-							</div>		
-						</div>
 
-						<input type="submit" name="submit" value="submit" class="btn btn-primary">	
-					</form>
-				</div>
+				    <div class="form-group">
+				    	<label for="grade">Choose Room</label>
+				    	<div class="row">
+				    		<div class="col-6">
+				    			<select class="form-control" name="grade" id="grade">
+				    				<option><---Select Grade---></option>
+				    				@foreach($grades as $row)
+				    				<option value="{{$row->id}}" data-id="{{$row->id}}">{{$row->name}}</option>
+				    				@endforeach
+				    			</select>
+				    		</div>
+				    		<div class="col-6">
+				    			<select class="form-control" name="room_id" id="room_id">
+				    				
+				    			</select>
+				    		</div>
+						</div>		
+					</div>
+					<div class="form-group">
+				    	<label for="guardianchoose">Guardian</label>
+					    <div class="row">
+					    		<div class="col-6">
+					    			<input type="email" id="guardianchoose" class="form-control ">
+					    		</div>
+
+					    		<div class="col-6">
+					    			<select name="user_id" class="form-control" id="user_id">
+
+					    			</select>
+					    		</div>
+					    </div>
+					</div>
+					<input type="submit" name="submit" value="submit" class="btn btn-primary">
+					
+					
+				</form>
 			</div>
 		</div>
 	</div>
-</div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+    	});
+	$('#grade').change(
+   		function() {
+   			// alert("OK");
+   			var id = $( 'option:selected', this ).data( 'id' );
+   			//alert(id);
+   			$.get('/getroom/'+id, function(res) {
+   				$room = res;
+   				var html;
+   				$.each($room, function(i, v) {
+   					//console.log(v.name);
+   					//console.log(v.id);
+   					var rname = v.name;
+   					var rid = v.id;
+   					html += `
+   					<option value="${v.id}" data-id="${v.id}">${v.name}</option>`;
+
+   				});
+   				$('#room_id').html(html);
+
+   			});
+   	});	
+    $('#guardianchoose').change(
+    	function() {
+    	var email = $('#guardianchoose').val();
+    	//alert(email);
+    	$.get('/getguardian/'+email, 
+    		function(res) {
+    		$guardian = res;
+    		var html;
+    		$.each($guardian, function(i, v) {
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var rname = v.name;
+   					var rid = v.id;
+   					html += `
+   					<option value="${v.id}" data-id="${v.id}">${v.name}</option>`;
+
+			});
+			$('#user_id').html(html);
+    	});
+    });	
+	});
+</script>
+
 @endsection

@@ -21,7 +21,7 @@
 							<th>Date</th>
 							<th>Status</th>
 							<th>Description</th>
-							<th>Student_id</th>
+							<th>Student</th>
 							<th class="text-right">Actions</th>
 						</tr>
 					</thead>
@@ -30,7 +30,10 @@
 						@foreach($attendance as $row)
 						<tr>
 							<td class="text-center">{{$i++}}</td>
-							<td>{{$row->attendance}}</td>
+							<td><a href="">{{$row->date}}</a></td>
+							<td>{{$row->status}}</td>
+							<td>{{$row->description}}</td>
+							<td>{{$row->student->name}}</td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">
 									<i class="material-icons">search</i>

@@ -21,8 +21,8 @@
 							<th>Time_start</th>
 							<th>Time_finish</th>
 							<th>Day</th>
-							<th>Class_id</th>
-							<th>Subject_id</th>
+							<th>Class</th>
+							<th>Subject</th>
 							<th class="text-right">Actions</th>
 						</tr>
 					</thead>
@@ -34,8 +34,8 @@
 							<td>{{$row->time_start}}</td>
 							<td>{{$row->time_finish}}</td>
 							<td>{{$row->day}}</td>
-							<td>{{$row->room_id}}</td>
-							<td>{{$row->subject_id}}</td>
+							<td>{{$row->room->name}}</td>
+							<td>{{$row->subject->name}}</td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">
 									<i class="material-icons">search</i>

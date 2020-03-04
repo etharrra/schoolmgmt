@@ -7,6 +7,7 @@ use App\Teacher;
 use App\Subject;
 use App\User;
 use App\Room;
+use App\Grade;
 use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
@@ -29,9 +30,10 @@ class TeacherController extends Controller
      */
     public function create()
     {
+        $grades = Grade::all();
         $rooms = Room::all();
         $subjects = Subject::all();
-        return view('backend.teacher.create',compact('subjects','rooms'));
+        return view('backend.teacher.create',compact('subjects','rooms','grades'));
     }
 
     /**
