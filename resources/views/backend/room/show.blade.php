@@ -39,15 +39,21 @@
 						</tr>
 						<tr>
 							<th>Wednesday</th>
-							
+							@foreach($twed as $row)
+								<td>{{$row->subname}}</td>
+							@endforeach	
 						</tr>
 						<tr>
 							<th>Thursday</th>
-							
+							@foreach($tthurs as $row)
+								<td>{{$row->subname}}</td>
+							@endforeach	
 						</tr>
 						<tr>
 							<th>Friday</th>
-							
+							@foreach($tfri as $row)
+								<td>{{$row->subname}}</td>
+							@endforeach
 						</tr>
 					</tbody>
 					<tfoot>
@@ -62,9 +68,19 @@
 							<th>2:30-3:15</th>				
 						</tr>
 					</tfoot>
-				</table>
-				
+				</table>				
 			</div>
+			<div class="row">
+				<div class="col-3">
+					<div class="card text-dark bg-success mb-3" style="max-width: 18rem;">
+						<div class="card-header">Teacher Name</div>
+						<div class="card-body">
+							<h5 class="card-title">Teacher Name</h5>
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						</div>
+					</div>
+				</div>
+			</div>				
 		</div>
 	</div>
 @endsection
