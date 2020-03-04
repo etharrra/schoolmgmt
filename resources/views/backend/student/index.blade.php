@@ -18,6 +18,7 @@
 							<th>Name</th>
 							<th>Phone</th>
 							<th>Room</th>
+							<th>Grade</th>
 							<th>Guardian Name</th>
 							<th class="text-right">Actions</th>
 						</tr>
@@ -25,11 +26,15 @@
 					<tbody>
 						@php $i = 1; @endphp
 						@foreach($students as $row)
+							{{$id = $row->room_id}}
 						<tr>
 							<td class="text-center">{{$i++}}</td>
 							<td>{{$row->name}}</td>
 							<td>{{$row->phone}}</td>
 							<td>{{$row->room->name}}</td>
+							<td>
+								{{dd($grades)}}
+							</td>
 							<td>{{$row->user->name}}</td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">

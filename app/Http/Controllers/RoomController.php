@@ -8,6 +8,10 @@ use App\Room;
 
 use App\Grade;
 
+use App\Timetable;
+
+use Illuminate\Support\Facades\DB;
+
 class RoomController extends Controller
 {
     /**
@@ -67,7 +71,65 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-    
+        $tmon = DB::table('timetables')
+                        ->join('rooms','timetables.room_id','=','rooms.id')
+                        ->join('subjects','timetables.subject_id','=','subjects.id')
+                        ->where('rooms.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('day', '=', 'monday');
+                        })
+                        ->select('subjects.*','subjects.name as subname')
+                        ->get();
+        $ttue = DB::table('timetables')
+                        ->join('rooms','timetables.room_id','=','rooms.id')
+                        ->join('subjects','timetables.subject_id','=','subjects.id')
+                        ->where('rooms.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('day', '=', 'tuesday');
+                        })
+                        ->select('subjects.*','subjects.name as subname')
+                        ->get();
+        $twed = DB::table('timetables')
+                        ->join('rooms','timetables.room_id','=','rooms.id')
+                        ->join('subjects','timetables.subject_id','=','subjects.id')
+                        ->where('rooms.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('day', '=', 'wednesday');
+                        })
+                        ->select('subjects.*','subjects.name as subname')
+                        ->get();
+        $tthurs = DB::table('timetables')
+                        ->join('rooms','timetables.room_id','=','rooms.id')
+                        ->join('subjects','timetables.subject_id','=','subjects.id')
+                        ->where('rooms.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('day', '=', 'thursday');
+                        })
+                        ->select('subjects.*','subjects.name as subname')
+                        ->get();
+        $tfri = DB::table('timetables')
+                        ->join('rooms','timetables.room_id','=','rooms.id')
+                        ->join('subjects','timetables.subject_id','=','subjects.id')
+                        ->where('rooms.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('day', '=', 'friday');
+                        })
+                        ->select('subjects.*','subjects.name as subname')
+                        ->get();
+                                                                                        
+        // dd($tmon);                
+       /* foreach ($timetable as $row) {
+            $sid = $row->subject_id;
+            $sname = DB::table('subjects')
+                        ->where('subjects.id','=',$sid)
+                        ->select('subjects.*','subjects.name as subname')
+                        ->get();
+                       
+        }*/
+        // dd($timetable);
+        return view('backend.room.show',compact('tmon','ttue','twed','tthurs','tfri'));
+        
+        
     }
 
     /**

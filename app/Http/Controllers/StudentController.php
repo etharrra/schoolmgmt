@@ -7,6 +7,7 @@ use App\Student;
 use App\Room;
 use App\User;
 use App\Grade;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -17,8 +18,29 @@ class StudentController extends Controller
      */
     public function index()
     {
+        /*$grades = DB::table('grades')
+                    ->join('students','grades.id','=','students.room_id')
+                    ->select('grades.*','grades.name as gname')
+                    ->get();
+                     dd($grades->gname);*/
         $students = Student::all();
-        return view('backend.student.index',compact('students'));
+        foreach ($students as $key => $value) {
+            $id = $value['room_id'];
+            // echo "$id";
+            $grades = DB::table('grades')
+                        ->join('students','grades.id','=','students.room_id')
+                        ->where('students.room_id','=',$id)
+                        ->select('grades.*','grades.name as gname')
+                        ->get();
+                         // dd($grades);
+           /* foreach ($grades as $key => $value) {
+                $gname = $value->gname;
+                 // dd($gname);
+                
+            }  */         
+        }
+        // dd($grades);
+        return view('backend.student.index',compact('students','grades'));
     }
 
     /**
