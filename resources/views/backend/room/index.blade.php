@@ -31,7 +31,7 @@
 							<td class="text-center">{{$i++}}</td>
 							<td>{{$row->name}}</td>
 							<td>{{$row->grade->name}}</td>
-							<td><a href="">View Schedule</a></td>
+							<td><a href="{{route('room.show',$row->id)}}">View Schedule</a></td>
 							<td class="td-actions text-right">
 								<!-- <button type="button" rel="tooltip" class="btn btn-info">
 									<i class="material-icons">search</i>

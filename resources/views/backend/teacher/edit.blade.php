@@ -50,76 +50,122 @@
 								</div>
 							</div>
 						</div>
+					
+					
 
-						<div class="form-group  ">
-							<label for="email" class=" col-form-label"> Email </label>
+					
 
-							<div>
-								<input type="email" name="email" class="form-control" id="email" value="{{$teacher->user->email}}">
+					<div class="form-group  ">
+						<label for="email" class=" col-form-label"> Email </label>
+				    	
+				    	<div>
+				      		<input type="email" name="email" class="form-control" id="email" value="{{$teacher->user->email}}">
+				      		
+				    	</div>
+					</div>
 
-							</div>
-						</div>
+					<div class="form-group  ">
+						<label for="phone" class=" col-form-label"> Phone </label>
+				    	
+				    	<div>
+				      		<input type="number" name="phone" class="form-control" id="phone" value="{{$teacher->phone}}">
+				      		
+				    	</div>
+					</div>
 
-						<div class="form-group  ">
-							<label for="phone" class=" col-form-label"> Phone </label>
+					<div class="form-group  ">
+						<label for="degree" class=" col-form-label"> Education </label>
+				    	
+				    	<div>
+				      		<input type="text" name="education" class="form-control" value="{{$teacher->education}}">
+				      		
+				    	</div>
+					</div>
 
-							<div>
-								<input type="number" name="phone" class="form-control" id="phone" value="{{$teacher->phone}}">
+					
 
-							</div>
-						</div>
+					<div class="form-group  {{ $errors->has('address') ? ' has-error' : '' }}">
+						<label for="address" class=" col-form-label"> Address </label>
+				    	
+				    	<div>
+				      		<textarea class="form-control" name="address" id="address">
+				      			{{$teacher->address}}
+				      		</textarea>
+				      		
+				    	</div>
+				    </div>
+				     <div class="form-group">
+						<label for="grade">Select Grade</label>
+						<select name="grade" id="grade" class="form-control">
+							<option selected=""><---Select Grade---></option>
+							@foreach($grades as $grade)
+							<option value="{{$grade->id}}" data-id="{{$grade->id}}">{{$grade->name}}</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="subject_id">Select Subject</label>
+						<select name="subject_id" id="subject_id" class="form-control">
+							<option><---Select Subject---></option>
+							@foreach($subjects as $row)
+							<option value="{{$row->id}}"  @if($teacher->subject_id == $row->id) {{'selected'}}@endif>{{$row->name}}</option>
+							@endforeach
+						</select>
+					</div>
 
-						<div class="form-group  ">
-							<label for="degree" class=" col-form-label"> Education </label>
-
-							<div>
-								<input type="text" name="education" class="form-control" value="{{$teacher->education}}">
-
-							</div>
-						</div>
-
-
-						<div class="form-group  {{ $errors->has('address') ? ' has-error' : '' }}">
-							<label for="address" class=" col-form-label"> Address </label>
-
-							<div>
-								<textarea class="form-control" name="address" id="address">
-									{{$teacher->address}}
-								</textarea>
-
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="subject_id">Select Subject</label>
-							<select name="subject_id" id="subject_id" class="form-control">
-								<option><---Select Subject---></option>
-									@foreach($subjects as $row)
-									<option value="{{$row->id}}"  @if($teacher->subject_id == $row->id) {{'selected'}}@endif>{{$row->name}}</option>
-									@endforeach
-								</select>
-						</div>
-
-						<div class="form-group">
-								<label for="room" class="form-control-label">Room</label>								
-								<select class="js-example-basic-multiple form-control" name="rooms[]" multiple="multiple">
-									@foreach($rooms as $row)
-									<option value="{{$row->id}}">{{$row->name}}</option>
-									@endforeach
-								</select>
-						</div>
-							<input type="submit" name="submit" value="submit" class="btn btn-primary">
-					</form>
-				</div>
+					<div class="form-group">								
+						<select class="js-example-basic-multiple form-control" id="room" name="rooms[]" multiple="multiple">
+								@foreach($rooms as $row)
+								<option value="{{$row->id}}">{{$row->name}}</option>
+								@endforeach
+						</select>
+					</div>
+					<input type="submit" name="submit" value="submit" class="btn btn-primary">
+					
+					
+				</form>
 			</div>
 		</div>
 	</div>
-</div>
-	@endsection
-	@section('script')
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.js-example-basic-multiple').select2();
+@endsection
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+    	$('#grade').change(
+   		function() {
+   			// alert("ok");
+   			var id = $( 'option:selected', this ).data( 'id' );
+   			//alert(id);
+   			$.get('/getroom/'+id, function(res) {
+   				$room = res;
+   				var html;
+   				$.each($room, function(i, v) {
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var rname = v.name;
+   					var rid = v.id;
+   					html += `<option value="${rid}">${rname}</option>`;
 
-		});
-	</script>
-	@endsection
+   				});
+   				$('#room').html(html);
+   			});
+
+   			$.get('/getsubject/'+id, function(res) {
+   				$subject = res;
+   				var html;
+   				$.each($subject, function(i, v) {
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var sname = v.subname;
+   					var sid = v.subject_id;
+   					html += `<option value="${sid}">${sname}</option>`;
+
+   				});
+   				$('#subject_id').html(html);
+   			});
+   		});
+    
+});
+</script>
+@endsection

@@ -208,7 +208,7 @@
         <!-- </div> -->
       <!-- </div> -->
     <!-- </div> -->
-  <!-- </div> -->
+  </div>
 
   <div class="container" id="contact">
     <div class="container-fluid mt-5">

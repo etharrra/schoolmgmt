@@ -114,10 +114,11 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
+        $grades = Grade::all();
         $teacher = Teacher::find($id);
         $subjects = Subject::all();
         $rooms = Room::all();
-        return view('backend.teacher.edit',compact('teacher','subjects','rooms'));
+        return view('backend.teacher.edit',compact('teacher','subjects','rooms','grades'));
     }
 
     /**

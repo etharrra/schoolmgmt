@@ -66,7 +66,11 @@
 						</div>
 					</div>
 					<div class="form-group" id="dinput">
-						
+						<label class="form-control-label" for="description">Reason For Absent</label>
+						<div>
+							<input type="text" name="description" class="form-control" id="description" 
+							value="@if($attendance->status == 'absent'){{$attendance->description}} @else{{''}} @endif">
+						</div>
 					</div>
 					<input type="submit" name="submit" value="submit" class="btn btn-primary">
 
@@ -81,7 +85,7 @@
 @section('script')
 <script type="text/javascript">
 	$(document).ready(function() {
-		// $('#dinput').hide();
+		 $('#dinput').hide();
 		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -131,19 +135,14 @@
 
 			});
 		}); 
+	var description = $('#description').val();	
 		
 	$('#present').click(
    		function(event) {
    	});
    	$('#absent').click(
    		function(event) {
-   			var html = `
-   			<label class="form-control-label" for="description">Reason For Absent</label>
-   			<div>
-   			<input type="text" name="description" class="form-control" id="description" 
-   			value="@if($attendance->status == 'absent'){{$attendance->description}} @else{{''}} @endif">
-   			</div>`;
-   			$('#dinput').html(html);
+   			$('#dinput').show();
    	});
 	});
 </script>
