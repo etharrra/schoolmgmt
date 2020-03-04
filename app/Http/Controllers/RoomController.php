@@ -79,6 +79,7 @@ class RoomController extends Controller
                            $query->where('day', '=', 'monday');
                         })
                         ->select('subjects.*','subjects.name as subname')
+                        ->orderBy('time_start', 'asc')
                         ->get();
         $ttue = DB::table('timetables')
                         ->join('rooms','timetables.room_id','=','rooms.id')
@@ -88,6 +89,7 @@ class RoomController extends Controller
                            $query->where('day', '=', 'tuesday');
                         })
                         ->select('subjects.*','subjects.name as subname')
+                        ->orderBy('time_start', 'asc')
                         ->get();
         $twed = DB::table('timetables')
                         ->join('rooms','timetables.room_id','=','rooms.id')
@@ -97,6 +99,7 @@ class RoomController extends Controller
                            $query->where('day', '=', 'wednesday');
                         })
                         ->select('subjects.*','subjects.name as subname')
+                        ->orderBy('time_start', 'asc')
                         ->get();
         $tthurs = DB::table('timetables')
                         ->join('rooms','timetables.room_id','=','rooms.id')
@@ -106,6 +109,7 @@ class RoomController extends Controller
                            $query->where('day', '=', 'thursday');
                         })
                         ->select('subjects.*','subjects.name as subname')
+                        ->orderBy('time_start', 'asc')
                         ->get();
         $tfri = DB::table('timetables')
                         ->join('rooms','timetables.room_id','=','rooms.id')
@@ -115,6 +119,7 @@ class RoomController extends Controller
                            $query->where('day', '=', 'friday');
                         })
                         ->select('subjects.*','subjects.name as subname')
+                        ->orderBy('time_start', 'asc')
                         ->get();
                                                                                         
         // dd($tmon);                
@@ -128,8 +133,6 @@ class RoomController extends Controller
         }*/
         // dd($timetable);
         return view('backend.room.show',compact('tmon','ttue','twed','tthurs','tfri'));
-        
-        
     }
 
     /**

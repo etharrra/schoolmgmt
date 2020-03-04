@@ -70,7 +70,8 @@ class AttendanceController extends Controller
      */
     public function show($id)
     {
-        //
+        $attendance = Attendance::find($id);
+        return view('backend.attendance.show',compact('attendance'));
     }
 
     /**

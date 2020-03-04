@@ -1,28 +1,31 @@
 @extends('backendtemplate')
 @section('content')
-	<div class="container-fluid mt-5 pt-5">
-		<div class="row">
-			<div class="col-md-10 col-sm-8 col-lg-10">
-				
-			</div>
-			<div class="col-md-2 col-sm-4 col-lg-2">
-				<a href="{{route('student.index')}}" class="btn btn-block btn-outline-success">Back</a>
+<div class="container-fluid">
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<div class="row">
+				<div class="col-10">
+					<h6 class="m-0 font-weight-bold text-primary">Student</h6>
+				</div>
+				<div class="col-md-2 col-sm-4 col-lg-2">
+					<a href="{{route('student.index')}}" class="btn btn-block btn-outline-success">back</a>
+				</div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-12">
 				<form action="{{ route('student.update',$student->id)}}" method="POST" enctype="multipart/form-data">
 
-					@csrf
-					@method('PUT')
-					<div class="form-group  ">
-						<label for="name" class="col-form-label"> Name </label>
-				    	
-				    	<div>
-				      		<input type="text" class="form-control" id="name"  name="name" value="{{$student->name}}">
-				      		
-				    	</div>
-					</div>
+
+						@csrf
+						@method('PUT')
+						<div class="form-group  ">
+							<label for="name" class="col-form-label"> Name </label>
+
+							<div>
+								<input type="text" class="form-control" id="name"  name="name" value="{{$student->name}}">
+
 
 					<div class="form-group">
 						<label class="form-control-label">Choose Avatar</label>
@@ -41,39 +44,41 @@
 								<div class="form-group">
 									<div class="mt-3">
 										<input type="file" id="avatar" name="avatar" class="form-control-file">	
+
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
-					<div class="form-group  ">
-						<label for="phone" class=" col-form-label"> Phone </label>
-				    	
-				    	<div>
-				      		<input type="number" name="phone" class="form-control" id="phone" value="{{$student->phone}}">
-				      		
-				    	</div>
-					</div>
+						<div class="form-group  ">
+							<label for="phone" class=" col-form-label"> Phone </label>
 
-					<div class="form-group  ">
-						<label for="dob" class=" col-form-label"> Date of Birth </label>
-				    	
-				    	<div>
-				      		<input type="date" name="dob" class="form-control" id="dob" value="{{$student->dob}}">
-				      		
-				    	</div>
-					</div>				
+							<div>
+								<input type="number" name="phone" class="form-control" id="phone" value="{{$student->phone}}">
 
-					<div class="form-group">
-						<label for="address" class=" col-form-label"> Address </label>
-				    	
-				    	<div>
-				      		<textarea class="form-control" name="address" id="address">
-				      			{{$student->address}}
-				      		</textarea>				      		
-				    	</div>
-				    </div>
+							</div>
+						</div>
+
+						<div class="form-group  ">
+							<label for="dob" class=" col-form-label"> Date of Birth </label>
+
+							<div>
+								<input type="date" name="dob" class="form-control" id="dob" value="{{$student->dob}}">
+
+							</div>
+						</div>				
+
+						<div class="form-group">
+							<label for="address" class=" col-form-label"> Address </label>
+
+							<div>
+								<textarea class="form-control" name="address" id="address">
+									{{$student->address}}
+								</textarea>				      		
+							</div>
+						</div>
+
+
 
 				    <div class="form-group">
 				    	<label for="grade">Choose Room</label>

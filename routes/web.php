@@ -22,7 +22,7 @@ Route::group([
 	//'namespace' => 'Backend'
 
 ], function() {
-	Route::get('/','BackendController@dashboard');
+	Route::get('dashboard','BackendController@dashboard');
 
 	Route::resource('academicyear','AcademicyearController');
 
@@ -43,6 +43,8 @@ Route::group([
 	Route::resource('mark','MarkController');
 
 	Route::resource('attendance','AttendanceController');
+	
+	Route::resource('contact','ContactController');
 
 
 	
@@ -53,6 +55,7 @@ Route::get('/','FrontendController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('/getroom/{id}','AjaxController@getroom')->name('getroom');
 

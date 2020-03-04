@@ -1,5 +1,6 @@
 @extends('backendtemplate')
 @section('content')
+
 <div class="container-fluid mt-5 pt-5">
 	<div class="row">
 		<div class="col-md-10 col-sm-8 col-lg-10">
@@ -47,7 +48,7 @@
 						<div class="form-group">
 							<label for="room">Select Room</label>
 							<select name="room" id="room" class="form-control">
-
+								<option><---Select Room---></option>
 
 							</select>
 						</div>
@@ -148,4 +149,5 @@
 
 });
 </script>
+
 @endsection

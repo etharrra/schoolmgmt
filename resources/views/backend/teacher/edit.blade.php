@@ -1,51 +1,55 @@
 @extends('backendtemplate')
 @section('content')
-	<div class="container-fluid mt-5 pt-5">
-		<div class="row">
-			<div class="col-md-10 col-sm-8 col-lg-10">
-				
-			</div>
-			<div class="col-md-2 col-sm-4 col-lg-2">
-				<a href="{{route('teacher.index')}}" class="btn btn-block btn-outline-success">Back</a>
+<div class="container-fluid">
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<div class="row">
+				<div class="col-10">
+					<h6 class="m-0 font-weight-bold text-primary">Teacher</h6>
+				</div>
+				<div class="col-md-2 col-sm-4 col-lg-2">
+					<a href="{{route('teacher.index')}}" class="btn btn-block btn-outline-success">back</a>
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-12">
-				<form action="{{ route('teacher.update',$teacher->id)}}" method="POST" enctype="multipart/form-data">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-12">
+					<form action="{{ route('teacher.update',$teacher->id)}}" method="POST" enctype="multipart/form-data">
 
-					@csrf
-					@method('PUT')
-					<div class="form-group  ">
-						<label for="name" class="col-form-label"> Name </label>
-				    	
-				    	<div>
-				      		<input type="text" class="form-control" id="name"  name="name" value="{{$teacher->user->name}}">
-				      		
-				    	</div>
-					</div>
+						@csrf
+						@method('PUT')
+						<div class="form-group  ">
+							<label for="name" class="col-form-label"> Name </label>
 
-					<div class="form-group">
-						<label class="form-control-label">Choose Avatar</label>
-						<nav>
-							<div class="nav nav-tabs" id="nav-tab" role="tablist">
-								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Old Avatar</a>
-								<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">New Avatar</a>
+							<div>
+								<input type="text" class="form-control" id="name"  name="name" value="{{$teacher->user->name}}">
+
 							</div>
-						</nav>
-						<div class="tab-content" id="nav-tabContent">
-							<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-								<img src="{{asset ($teacher->avatar)}}" class="img-fluid d-block" width="100px">
-								<input type="hidden" name="avatar" value="{{$teacher->avatar}}">
-							</div>
-							<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-								<div class="form-group">
-									<div class="mt-3">
-										<input type="file" id="avatar" name="newavatar" class="form-control-file">	
+						</div>
+
+						<div class="form-group">
+							<label class="form-control-label">Choose Avatar</label>
+							<nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Old Avatar</a>
+									<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">New Avatar</a>
+								</div>
+							</nav>
+							<div class="tab-content" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+									<img src="{{asset ($teacher->avatar)}}" class="img-fluid d-block" width="100px">
+									<input type="hidden" name="avatar" value="{{$teacher->avatar}}">
+								</div>
+								<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+									<div class="form-group">
+										<div class="mt-3">
+											<input type="file" id="avatar" name="newavatar" class="form-control-file">	
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					
 					
 

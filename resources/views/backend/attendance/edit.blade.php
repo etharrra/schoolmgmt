@@ -1,5 +1,6 @@
 @extends('backendtemplate')
 @section('content')
+
 <div class="container-fluid mt-5 pt-5">
 	<div class="row">
 		<div class="col-md-10 col-sm-8 col-lg-10">
@@ -13,6 +14,7 @@
 		<div class="card-header py-3">
 			<div class="row">
 				<div class="col-10">
+
 					<h6 class="m-0 font-weight-bold text-primary">Attendance</h6>
 				</div>
 
@@ -23,6 +25,7 @@
 			</div>
 		</div>
 		<div class="card-body">
+			
 			<form action="{{ route('attendance.update',$attendance->id)}}" method="POST" enctype="multipart/form-data">
 
 				@csrf
@@ -143,4 +146,5 @@
    	});
 	});
 </script>
+
 @endsection

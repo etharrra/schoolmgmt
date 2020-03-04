@@ -67,7 +67,8 @@ class MarkController extends Controller
      */
     public function show($id)
     {
-        //
+        $mark = Mark::find($id);
+        return view('backend.mark.show',compact('mark'));
     }
 
     /**

@@ -63,7 +63,8 @@ class AcademicyearController extends Controller
      */
     public function show($id)
     {
-        //
+        $academicyear = Academicyear::find($id);
+        return view('backend.academicyear.show',compact('academicyear'));
     }
 
     /**
