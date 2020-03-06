@@ -1,15 +1,7 @@
 @extends('backendtemplate')
 @section('content')
 
-<div class="container-fluid mt-5 pt-5">
-	<div class="row">
-		<div class="col-md-10 col-sm-8 col-lg-10">
-
-		</div>
-
-	</div>
-	<div class="container-fluid">
-
+<div class="container-fluid">
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<div class="row">

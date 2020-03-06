@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::group([
@@ -44,7 +44,7 @@ Route::group([
 
 	Route::resource('attendance','AttendanceController');
 	
-	Route::resource('contact','ContactController');
+	//Route::resource('contact','ContactController');
 
 
 	
@@ -64,3 +64,8 @@ Route::get('/getstudent/{id}','AjaxController@getstudent')->name('getstudent');
 Route::get('/getguardian/{email}','AjaxController@getguardian')->name('getguardian');
 
 Route::get('/getsubject/{id}','AjaxController@getsubject')->name('getsubject');
+
+
+
+// Frontend Contact
+Route::get('/contacts','FrontendController@Contact')->name('contacts');

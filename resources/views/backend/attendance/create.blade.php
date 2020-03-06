@@ -1,15 +1,6 @@
 @extends('backendtemplate')
 @section('content')
-
-<div class="container-fluid mt-5 pt-5">
-	<div class="row">
-		<div class="col-md-10 col-sm-8 col-lg-10">
-
-		</div>
-
-	</div>
 	<div class="container-fluid">
-
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
 				<div class="row">
@@ -27,7 +18,7 @@
 				<form action="{{ route('attendance.store')}}" method="POST" enctype="multipart/form-data">
 
 					@csrf
-					<div class="form-group  ">
+					<div class="form-group">
 						<label for="date" class="col-form-label"> Date </label>
 
 						<div>
@@ -53,7 +44,8 @@
 							</select>
 						</div>
 
-						<div class="form-group">							<label for="student">Select Student</label>
+						<div class="form-group">							
+							<label for="student">Select Student</label>
 							<select class="form-control" name="student" id="student">
 
 							</select>
