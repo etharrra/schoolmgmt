@@ -13,11 +13,7 @@
 			</div>
 		</div>
 		<div class="card-body">
-			
-
-
-
-			
+			{{$guardian->user->name}}
 		</div>
 	</div>
 </div>

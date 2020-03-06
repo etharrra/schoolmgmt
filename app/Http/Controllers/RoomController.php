@@ -81,6 +81,7 @@ class RoomController extends Controller
                         ->select('subjects.*','subjects.name as subname')
                         ->orderBy('time_start', 'asc')
                         ->get();
+
         $ttue = DB::table('timetables')
                         ->join('rooms','timetables.room_id','=','rooms.id')
                         ->join('subjects','timetables.subject_id','=','subjects.id')
@@ -91,6 +92,7 @@ class RoomController extends Controller
                         ->select('subjects.*','subjects.name as subname')
                         ->orderBy('time_start', 'asc')
                         ->get();
+                        
         $twed = DB::table('timetables')
                         ->join('rooms','timetables.room_id','=','rooms.id')
                         ->join('subjects','timetables.subject_id','=','subjects.id')

@@ -43,23 +43,42 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $request->validate([
+        //dd($request);
+       /* $request->validate([
             "date" => 'required',
             "status" => 'required',
             "student" => 'required',
             "description" => 'sometimes'
         ]);
-        //dd($request);
+        dd($request);*/
         // Store
-        $attendance = new Attendance;
-        $attendance->date = request('date');
-        $attendance->status = request('status');
-        $attendance->student_id = request('student');
-        $attendance->description = request('description');
-        $attendance->save();
+        $student_list = request('mycart');
 
-        return redirect()->route('attendance.index');
+        //dd($student_list);
+        
+        
+             //dd(count($student_list));
+           foreach ($student_list as $key => $value) {
+               // dd($value);
+                $date = request('date');
+                
+                $attendance = new Attendance;
+                $attendance->date = $date;
+                $description=$value['description'];
+                $attendance->description=$description;
+                if ($description) {
+                    $attendance->status = "absent";
+                }else{
+                    $attendance->status = "present";
+                }
+                $attendance->student_id = $value['id'];
+
+              
+          $attendance->save();
+            
+            
+        }
+        return $attendance;
     }
 
     /**
