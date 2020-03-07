@@ -35,9 +35,9 @@
 							<td>{{$row->phone}}</td>
 							<td>{{$row->address}}</td>
 							<td class="td-actions text-right">
-								<a href="{{route('guardian.show',$row->id)}}" class="btn btn-info detail">
+								<!-- <a href="{{route('guardian.show',$row->id)}}" class="btn btn-info detail">
 									<i class="fas fa-search"></i>
-								</a>
+								</a> -->
 								<a href="{{route('guardian.edit',$row->id)}}" class="btn btn-success">
 									<i class="fas fa-edit"></i>
 								</a>

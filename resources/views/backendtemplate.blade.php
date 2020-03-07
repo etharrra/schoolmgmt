@@ -33,14 +33,14 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-success  sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-icon ">
+          <i class="fas fa-school" style="font-size: 30px;color: white;"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">MMIT </div>
+        <div class="sidebar-brand-text mx-3">Perfect School </div>
       </a>
 
       <!-- Divider -->
@@ -65,13 +65,13 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>1.March.2020:</span>
+          <span>Academic Cleandar</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">1.March.2020:</h6>
+            <h6 class="collapse-header">Academic Cleandar</h6>
             <a class="collapse-item" href="{{route('academicyear.index')}}">Academic Year</a>
-            <a class="collapse-item" href="{{route('attendance.index')}}">Attendance</a>
+            <a class="collapse-item" href="{{route('timetable.index')}}">Timetable</a>
             <a class="collapse-item" href="{{route('grade.index')}}">Grade</a>
           </div>
         </div>
@@ -81,15 +81,14 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>2.March.2020</span>
+          <span>Our Activities</span>
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">2.March.2020:</h6>
-            <a class="collapse-item" href="{{route('guardian.index')}}">Guardian</a>
+            <h6 class="collapse-header">Our Activities</h6>
+            <a class="collapse-item" href="{{route('attendance.index')}}">Attendance</a>
             <a class="collapse-item" href="{{route('mark.index')}}">Mark</a>
-            <a class="collapse-item" href="{{route('room.index')}}">Room</a>
-            <a class="collapse-item" href="{{route('student.index')}}">Student</a>
+            <a class="collapse-item" href="{{route('subject.index')}}">Subject</a>
           </div>
         </div>
       </li>
@@ -98,14 +97,16 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities1" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>3.March.2020</span>
+          <span>Our Environment</span>
         </a>
         <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">3.March.2020:</h6>
-            <a class="collapse-item" href="{{route('subject.index')}}">Subject</a>
+            <h6 class="collapse-header">Our Environment</h6>
+            <a class="collapse-item" href="{{route('room.index')}}">Room</a>
+            <a class="collapse-item" href="{{route('student.index')}}">Student</a>
+            <a class="collapse-item" href="{{route('guardian.index')}}">Guardian</a>
             <a class="collapse-item" href="{{route('teacher.index')}}">Teacher</a>
-            <a class="collapse-item" href="{{route('timetable.index')}}">Timetable</a>
+            
           </div>
         </div>
       </li>
@@ -176,18 +177,7 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="ffas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-
+          
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
@@ -213,11 +203,7 @@
 
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
-              </a>
+              
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
@@ -262,11 +248,7 @@
 
             <!-- Nav Item - Messages -->
             <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-envelope fa-fw"></i>
-                <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">7</span>
-              </a>
+              
               <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">

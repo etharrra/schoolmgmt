@@ -42,7 +42,7 @@
             <a class="nav-link" href="#" style="font-size: 20px;color: white;">Teachers</a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="{{route('contacts')}}" style="font-size: 20px;color: white;">Contact</a>
+            <a class="nav-link" href="" style="font-size: 20px;color: white;">Contact</a>
           </li>
           <li class="nav-item px-3">
             <a class="nav-link" href="#" style="font-size: 20px;color: white;">login</a>
@@ -79,7 +79,7 @@
         </span>
         <div class="card-body mt-3">
           <h3>Experience Teachers</h3>
-          <p>Recording and reviewing students’ attendance record is just one of the main features of school management system. The system allows you to create various attendance report per class, student, gender, and many other variables for the whole term.  
+          <p> Teachers participating in teacher education, this study examined associations between classroom management practices, teaching experience, and teachers’ beliefs.Teaching experience was positively related to self-efficacy and beliefs in constructivism but did not impact practices. 
           </p>
         </div>
         </div>
@@ -92,7 +92,7 @@
         </span>
         <div class="card-body mt-3">
           <h3>Smart Classroom</h3>
-          <p>Teachers can hold the exams within the platform or outside the platform. If the exams is not in the system, teachers can grade and post the result in the  system. It also provides report generation which calculate all aspects of grading automatically.
+          <p>Smart Classrooms are technology enhanced classrooms that foster opportunities for teaching and learning by integrating learning technology, such as computers, specialized software, audience response technology, assistive listening devices, networking, and audio/visual capabilities.
           </p>
         </div>
         </div>
@@ -205,9 +205,16 @@
     </div>
       <div id="contactForm">
       <div class="container-fluid mt-5">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+          @endif
         <div class="row">
+          
           <div class="col-lg-6 col-md-12 col-sm-12">
-            <form>
+            <form action="{{route('contact.store')}}" method="post">
+              @csrf
               <div class="form-group">
                 <input type="text" name="name" placeholder="Your Name" class="form-control">
               </div>
@@ -215,14 +222,14 @@
                 <input type="email" name="email" placeholder="Your Email" class="form-control">
               </div>
               <div class="form-group">
-                <input type="text" name="subjet" placeholder="Subject" class="form-control">
+                <input type="text" name="subject" placeholder="Subject" class="form-control">
               </div>
               <div class="form-group">
-                <textarea class="form-control" rows="5" name="comment" placeholder="Message"></textarea>
+                <textarea class="form-control" rows="5" name="message" placeholder="Message"></textarea>
               </div>
               <br>
               <div class="mt-1 mb-2">
-                <a href="contact.html" class="btn btn-success" id="contactbtncontact">Contact</a>
+                <input type="submit" name="" value="Submit" class="btn btn-success">
               </div>
               <br>
             </form>

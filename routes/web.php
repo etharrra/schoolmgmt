@@ -63,9 +63,12 @@ Route::get('/getstudent/{id}','AjaxController@getstudent')->name('getstudent');
 
 Route::get('/getguardian/{email}','AjaxController@getguardian')->name('getguardian');
 
+Route::get('/gradestudent/{id}','AjaxController@gradestudent')->name('gradestudent');
+
 Route::get('/getsubject/{id}','AjaxController@getsubject')->name('getsubject');
 
+Route::get('/roomdetail/{id}','AjaxController@roomdetail')->name('roomdetail');
 
+Route::resource('contact','ContactController');
 
-// Frontend Contact
-Route::get('/contacts','FrontendController@Contact')->name('contacts');
+Route::get('/parents','ParentController@index');

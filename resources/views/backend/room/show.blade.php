@@ -8,7 +8,7 @@
 					<h6 class="m-0 font-weight-bold text-primary">Room</h6>
 				</div>
 				<div class="col-2">
-					<a href="{{route('room.index')}}" class="btn btn-block btn-outline-success">Add New</a>
+					<a href="{{route('room.index')}}" class="btn btn-block btn-outline-success">Back</a>
 				</div>
 			</div>
 		</div>
@@ -44,13 +44,17 @@
 							<th>Wednesday</th>
 							@foreach($twed as $row)
 								<td>{{$row->subname}}</td>
+
 							@endforeach
+
 						</tr>
 						<tr>
 							<th>Thursday</th>
 							@foreach($tthurs as $row)
 								<td>{{$row->subname}}</td>
-							@endforeach
+
+							@endforeach	
+
 						</tr>
 						<tr>
 							<th>Friday</th>
@@ -71,9 +75,9 @@
 							<th>2:30-3:15</th>				
 						</tr>
 					</tfoot>
-				</table>
-				
+				</table>				
 			</div>
+						
 		</div>
 	</div>
 </div>	

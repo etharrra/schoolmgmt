@@ -42,8 +42,9 @@
               @endphp
               @foreach($v as $key => $value)
               <span class='badge badge-pill badge-primary'>
-                {{$value->name}},           </span>
-                @endforeach">
+                {{$value->name}},           
+              </span>
+              @endforeach">
 
                 <i class="fas fa-search"></i>
               </a>

@@ -15,10 +15,13 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form action="{{ route('attendance.store')}}" method="POST" enctype="multipart/form-data">
+				<form>
 
-					@csrf
 					<div class="form-group">
+
+					
+					<div class="form-group  ">
+
 						<label for="date" class="col-form-label"> Date </label>
 
 						<div>
@@ -27,46 +30,31 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="grade">Select Grade</label>
-						<select name="grade" id="grade" class="form-control">
-							<option selected=""><---Select Grade---></option>
-								@foreach($grades as $grade)
-								<option value="{{$grade->id}}" data-id="{{$grade->id}}">{{$grade->name}}</option>
-								@endforeach
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="room">Select Room</label>
-							<select name="room" id="room" class="form-control">
-								<option><---Select Room---></option>
-
-							</select>
-						</div>
-
-						<div class="form-group">							
-							<label for="student">Select Student</label>
-							<select class="form-control" name="student" id="student">
-
-							</select>
-						</div>
-						<div class="form-group">
-							<h4>Attendance</h4>
-							<div>
-								<label for="present" class="form-control-label">Present</label>
-								<input type="radio" name="status" value="present" id="present">
-
-								<label for="absent" class="form-control-label">Absent</label>
-								<input type="radio" name="status" value="absent" id="absent">
+						<div class="row">
+							<div class="col-6">
+								<label for="grade">Select Grade</label>
+								<select name="grade" id="grade" class="form-control">
+									<option selected=""><---Select Grade---></option>
+										@foreach($grades as $grade)
+										<option value="{{$grade->id}}" data-id="{{$grade->id}}">{{$grade->name}}</option>
+										@endforeach
+									</select>
+							</div>
+							<div class="col-6">
+								<label for="room">Select Room</label>
+								<select name="room" id="room" class="form-control">
+									
+								</select>
 							</div>
 						</div>
-						<div class="form-group" id="dinput" style="display: hidden;">
-							<label class="form-control-label" for="description">Reason For Absent</label>
-							<div>
-								<input type="text" name="description" class="form-control" id="description">
-							</div>
+					</div>
+						<div class="form-group">					
+							<ul class="list-group" id="student_list">
+								
+							</ul>
 						</div>
-						<input type="submit" name="submit" value="submit" class="btn btn-primary">
+
+						<button class="btn btn-primary attendsubmit">submit</button>
 
 
 					</form>
@@ -85,7 +73,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-    $('.js-example-basic-multiple').select2();
    	$('#grade').change(
    		function() {
 
@@ -93,13 +80,14 @@
    			//alert(id);
    			$.get('/getroom/'+id, function(res) {
    				$room = res;
-   				var html;
+   				var html='<option selected=""><---Choose Room---></option>';
    				$.each($room, function(i, v) {
-   					//console.log(v.name);
+   					// console.log(v.name);
    					//console.log(v.id);
    					var rname = v.name;
    					var rid = v.id;
    					html += `
+
    					<option value="${v.id}" data-id="${v.id}">${v.name}</option>`;
 
    				});
@@ -114,29 +102,122 @@
    			var id = $( 'option:selected', this ).data( 'id' );
    			//alert(id);
    			$.get('/getstudent/'+id, function(res) {
-   				$student = res;
-   				var html;
-   				$.each($student, function(i, v) {
-   					//console.log(v.name);
-   					//console.log(v.id);
-   					var rname = v.name;
-   					var rid = v.id;
-   					html += `
-   					<option value="${v.id}" data-id="${v.id}">${v.name}</option>`;
+   				var student = res;
+   				for (var i = 0; i < student.length; i++) {
+   					student[i]["description"] = null;
+   				}
+   				console.log(student);
+   				var cart = localStorage.getItem("mycart");
+   				var exit = 0;
+   				
+				if (!exit) {
+					localStorage.clear();
+				}
+				cart = JSON.stringify(student);
+				localStorage.setItem("mycart", cart);
+
+   				var html=''; var i = 1;
+   				$.each(student, function(i, v) {
+
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var stname = v.name;
+   					var stid = v.id;
+   					html += `<li class="list-group-item">
+									<div class="row">
+										<div class="col-4 text-center">
+											<label class="form-check-label text-success" for="${stid}">
+											${stname}
+											</label>
+											<input type="hidden" class="cstudentid" value=${stid} name="student_id">
+										</div>
+										<div class="col-2">
+											<input type="checkbox" class="form-check-inline cbox" name="status" id="${stid}" value="${stid}" checked>
+										</div>
+										<div class="col-6">
+											<input type="text" name="description[]" class="form-control desc  des${stid}" id="${stid}">
+										</div>
+									</div>
+								</li>`;
 
    				});
-   				$('#student').html(html);
+   				$('#student_list').html(html);
+   				$('.desc').hide();
+   				$('.cbox').click(
+   					function() {
+   						var checked_status = this.checked;
+   						var cbox = $(this).val();
+   						var status;
+   						if(checked_status == false) {
+   							$('.des'+cbox).show();
+   							//var desid = $('.cbox').val();
+   							//alert(cbox);
+   							$('.des'+cbox).change(
+   								function() {
+   									
+   								var vdes = $(this).val();
+   								//alert(desid);
+   								
+   								var cart = localStorage.getItem("mycart");
+   								var mycart=JSON.parse(cart);
+   								$.each(mycart, function(i, v) {
+   									
+   									
+   										if(v.id==cbox){
+   											alert("Ok");
+   										v.description=vdes;
+   										
+   									}
+   									
+   										 /* ishoeArray[id].qty=qty;terate through array or object */
+   									});
+   								cart = JSON.stringify(mycart);
+								localStorage.setItem("mycart", cart);
+   								
+
+
+
+   								
+   								/*$.each(cart, function(i, v) {
+   									
+   								});
+   								*/
+
+   							});
+   						}
+   						else { 
+   							$('.des'+cbox).hide();
+   							$('.des'+cbox).val(null);
+   							var stuid = $(this).val();
+   							// console.log(stuid);
+   							// alert(desvalue);
+   							// $('.des'+cbox).removeAttr('value');
+   						}
+   				});
+   				
 
    			});
    	}); 
-   	$('#present').click(
-   		function(event) {
-   		$('#dinput').hide();
-   	});
-   	$('#absent').click(
-   		function(event) {
-   		$('#dinput').show('slow');
-   	});
+   
+   $("form").submit(function(e){
+        e.preventDefault();
+   		//alert("OK");
+   		$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+        });
+        var date = $('#date').val();
+        var cart = localStorage.getItem("mycart");
+        var mycart = JSON.parse(cart);
+        $.post('/backend/attendance/', {date:date,mycart:mycart}, 
+        	function(response) {
+        	if (response) {
+        		alert("Successfully!");
+        		localStorage.clear();
+        	}
+        });
+   });
 
 
 });

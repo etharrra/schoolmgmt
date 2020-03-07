@@ -18,37 +18,7 @@
 					<form action="{{ route('mark.store')}}" method="POST" enctype="multipart/form-data">
 
 						@csrf
-						<div class="form-group  ">
-							<label for="mark" class="col-form-label"> Mark </label>
-							<div>
-								<input type="text" class="form-control" id="mark"  name="mark">
-								@error('mark')
-								<div class="alert alert-danger">{{ $message }}</div>
-								@enderror
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="student_id">Student</label>
-							<div>
-								<select class="form-control" name="student_id" id="student_id">
-									@foreach($students as $row)
-									<option value="{{$row->id}}">{{$row->name}}</option>
-									@endforeach
-								</select>
-							</div>		
-						</div>
-
-						<div class="form-group">
-							<label for="subject_id">Subject</label>
-							<div>
-								<select class="form-control" name="subject_id" id="subject_id">
-									@foreach($subjects as $row)
-									<option value="{{$row->id}}">{{$row->name}}</option>
-									@endforeach
-								</select>
-							</div>		
-						</div>
-
+						
 						<div class="form-group  ">
 							<label for="month" class="col-form-label"> Month </label>
 
@@ -69,6 +39,38 @@
 								@enderror
 							</div>
 						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-6">
+									<label for="grade">Select Grade</label>
+									<select name="grade" id="grade" class="form-control">
+										<option selected=""><---Select Grade---></option>
+											@foreach($grades as $grade)
+											<option value="{{$grade->id}}" data-id="{{$grade->id}}">{{$grade->name}}</option>
+											@endforeach
+										</select>
+
+									</div>
+									<div class="col-6">
+										<label for="room">Select Room</label>
+										<select name="room" id="room" class="form-control">
+
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="subject_id">Select Subject</label>
+								<select name="subject_id" id="subject_id" class="form-control">
+
+								</select>	
+							</div>	
+							<div class="form-group">					
+								<ul class="list-group" id="student_list">
+
+								</ul>
+							</div>
+						
 
 						<input type="submit" name="submit" value="submit" class="btn btn-primary">	
 					</form>
@@ -77,4 +79,107 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+
+@section('script')
+<script type="text/javascript">
+	$(document).ready(function() {
+
+    $('.js-example-basic-multiple').select2();
+    	$('#grade').change(
+   		function() {
+   			// alert("ok");
+   			var id = $( 'option:selected', this ).data( 'id' );
+   			//alert(id);
+   			$.get('/getroom/'+id, function(res) {
+   				$room = res;
+   				var html='<option selected=""><---Select Room---></option>';
+   				$.each($room, function(i, v) {
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var rname = v.name;
+   					var rid = v.id;
+   					html += `<option value="${rid}" data-id="${rid}">${rname}</option>`;
+
+   				});
+   				$('#room').html(html);
+   			});
+
+   			$.get('/getsubject/'+id, function(res) {
+   				$subject = res;
+   				var html='<option selected=""><---Select Subject---></option>';
+   				$.each($subject, function(i, v) {
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var sname = v.subname;
+   					var sid = v.subject_id;
+   					html += `<option value="${sid}">${sname}</option>`;
+
+   				});
+   				$('#subject_id').html(html);
+   			});
+   		});
+    	$('#room').change(
+    		
+    		function() {
+
+    			var id = $( 'option:selected', this ).data( 'id' );
+   			//alert(id);
+   			$.get('/getstudent/'+id, function(res) {
+   				var student = res;
+   				// console.log(student);
+   				for (var i = 0; i < student.length; i++) {
+   					student[i]["mark"] = null;
+   				}
+   				// console.log(student);
+   				var mark = localStorage.getItem("mymark");
+   				var exit = 0;
+   				
+				if (!exit) {
+					localStorage.clear();
+				}
+				mark = JSON.stringify(student);
+				localStorage.setItem("mymark", mark);
+
+   				var html=''; var i = 0; var n = 0;var o =0;
+   				$.each(student, function(i, v) {
+
+   					// console.log(v.name);
+   					// console.log(v.id);
+   					var stname = v.name;
+   					var stid = v.id;
+   					// console.log(stid);
+   					html += `
+   					<li class="list-group-item">
+	   					<div class="row">
+		   					<div class="col-4 text-center">
+			   					<label class="form-check-label text-success" for="${i++}">
+			   					${stname}
+			   					</label>
+			   					<input type="hidden" class="hi${o++}" value=${stid} name="student_id">
+			   				</div>
+			   				<div class="col-8">
+			   					<input type="text" name="mark" class="form-control mark" id="${n++}">
+		   					</div>
+	   					</div>
+   					</li>`;
+   					var studentid = $('.hi'+stid).val();
+   				});
+   				$('#student_list').html(html);
+   				$('.mark').focus(
+   					function() {
+   						var studentid = $('.hi'+o).val();
+   						console.log(studentid);
+   				});
+   				$('.mark').change(
+   					function() {
+   					
+   				}); 							
+
+   			});
+   		});
+    
+});
+</script>
 @endsection

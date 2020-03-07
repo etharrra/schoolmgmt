@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mark;
 use App\Student;
 use App\Subject;
+use App\Grade;
 
 class MarkController extends Controller
 {
@@ -27,9 +28,10 @@ class MarkController extends Controller
      */
     public function create()
     {
+        $grades = Grade::all();
         $students = Student::all();
         $subjects = Subject::all();
-        return view('backend.mark.create',compact('students','subjects'));
+        return view('backend.mark.create',compact('students','subjects','grades'));
     }
 
     /**
