@@ -11,9 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('frontendtemplate');
-// });
+Route::get('/', function () {
+    return view('frontendtemplate');
+});
 
 Route::group([
 	//'name' => 'backend.',
@@ -50,7 +50,7 @@ Route::group([
 	
 });
 
-Route::get('/index','FrontendController@index')->name('index');
+Route::get('/','FrontendController@index')->name('index');
 
 Auth::routes();
 
