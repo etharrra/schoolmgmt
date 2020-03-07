@@ -35,18 +35,8 @@
            <td>{{$row->subject->name}}</td>
            <td class="td-actions text-right">
 
-            <a href="#" class="btn btn-info detail" data-id="{{$row->id}}" data-name="{{$row->user->name}}" data-email="{{$row->user->email}}" data-avatar="{{$row->avatar}}" data-phone="{{$row->phone}}" data-education="{{$row->education}}" data-address="{{$row->address}}" data-subject="{{$row->subject->name}}"
-              data-rooms="
-              @php
-              $v = $row->rooms;
-              @endphp
-              @foreach($v as $key => $value)
-              <span class='badge badge-pill badge-primary'>
-                {{$value->name}},           
-              </span>
-              @endforeach">
-
-                <i class="fas fa-search"></i>
+            <a href="{{route('teacher.show',$row->id)}}" class="btn btn-info detail" >
+              <i class="fas fa-search"></i>
               </a>
 
 
@@ -86,7 +76,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="detailModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="detailModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -110,67 +100,105 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
 @endsection
 
-@section('script')
+
+<!-- I tried to show it with modal but it's taking too long so i gonna show it with another way -->
+<!-- @section('script')
 <script type="text/javascript">
 
   $(document).ready(function() {
     $(".detail").click(
       function() {
-                //alert("ok");
-                var id = $(this).data('id');
-                var name = $(this).data('name');
-                var email = $(this).data('email');
-                var avatar = $(this).data('avatar');
-                var phone = $(this).data('phone');
-                var education = $(this).data('education');
-                var address = $(this).data('address');
-                var subject = $(this).data('subject');
-                var rooms = $(this).data('rooms')
-                var modalbox = `
-                <table class="table table-borderless">
-                <tr>
-                <td rowspan="2">
-                <img src="${avatar}" class="img-fluid d-block rounded-circle">
-                </td>
-                <th>
-                Email
-                </th>
-                <td>
-                ${email}
-                </td>
-                </tr>
-                <tr>
-                <th>Phone</th>
-                <td>${phone}</td>
-                </tr>
-                <tr>
-                <th>Education</th>
-                <th colspan="2">Sub</th>
-                </tr>
-                <tr>
-                <td>${education}</td>
-                <td colspan="2">${subject}</td>
-                </tr>
-                <tr>
-                <th>Address</th>
-                <th colspan="2">Rooms</th>
-                </tr>
-                <tr>
-                <td>${address}</td>
-                <td colspan="2">${rooms}</td>
-                </tr>
-                </table>`;
+        // alert("OK");
+        var teacherid = $(this).data('id');
+        var teachername = $(this).data('name');
+        var teacheremail = $(this).data('email');
+        // console.log(teacherid);
+        $.get('/backend/teacher/'+teacherid, 
+          function(res) {
+            // console.log(res.room);
+            var teacher = res.teacher;
+            var room = res.room;
+            
+            var modal = `<table class="table table-borderless">
+                            <tr>
+                              <td rowspan="2">
+                                <img src="${teacher.avatar}" class="img-fluid d-block rounded-circle">
+                              </td>
+                              <th>
+                                Email
+                              </th>
+                              <td>
+                                ${teacheremail}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>Phone</th>
+                              <td>${teacher.phone}</td>
+                            </tr>
+                            <tr>
+                              <th>Education</th>
+                              <th colspan="2">Sub</th>
+                            </tr>
+                            <tr>
+                              <td>${teacher.education}</td>
+                              <td colspan="2">${teacher.subject_id}</td>
+                            </tr>
+                            <tr>
+                              <th>Address</th>
+                              <th colspan="2">Grade/Rooms</th>
+                            </tr>
+                            <tr>
+                              <td>${teacher.address}</td>
+                              <td colspan="2" id="roomgrade">
 
-                //alert(id + name + email + avatar + phone + education + address + subject);
-                $('#detailModalLabel').text(name);
-                $('#dmodalbody').html(modalbox);
-                $('#detailModal').modal('show');
-
-              });
+                              </td>
+                            </tr>
+                          </table>`;
+          $('#dmodalbody').html(modal);
+          $('#detailModal').show();
+        });
+      });
   });
 
 </script>
-@endsection
+@endsection -->
+
+
+
+<!-- var modalbox = `
+<table class="table table-borderless">
+  <tr>
+    <td rowspan="2">
+      <img src="${avatar}" class="img-fluid d-block rounded-circle">
+    </td>
+    <th>
+      Email
+    </th>
+    <td>
+      ${email}
+    </td>
+  </tr>
+  <tr>
+    <th>Phone</th>
+    <td>${phone}</td>
+  </tr>
+  <tr>
+    <th>Education</th>
+    <th colspan="2">Sub</th>
+  </tr>
+  <tr>
+    <td>${education}</td>
+    <td colspan="2">${subject}</td>
+  </tr>
+  <tr>
+    <th>Address</th>
+    <th colspan="2">Rooms</th>
+  </tr>
+  <tr>
+    <td>${address}</td>
+    <td colspan="2">${rooms}</td>
+  </tr>
+</table>`; -->

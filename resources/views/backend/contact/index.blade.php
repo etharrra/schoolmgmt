@@ -8,7 +8,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Attendance</h6>
                     </div>
                     <div class="col-2">
-                        <a href="{{route('attendance.create')}}" class="btn btn-block btn-outline-success mb-3">Add New</a>
+                        <a href="{{route('contact.create')}}" class="btn btn-block btn-outline-success mb-3">Add New</a>
                     </div>
                 </div>
             </div>

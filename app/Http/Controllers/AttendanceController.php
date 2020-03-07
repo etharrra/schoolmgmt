@@ -125,7 +125,7 @@ class AttendanceController extends Controller
             "description" => 'sometimes'
         ]);
 
-        dd($request);
+        // dd($request);
         // Store
         $attendance = Attendance::find($id);
         $attendance->date = request('date');

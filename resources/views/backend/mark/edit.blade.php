@@ -31,9 +31,9 @@
 							<label for="student_id">Student</label>
 							<div>
 								<select class="form-control" name="student_id" id="student_id">
-									@foreach($students as $row)
-									<option value="{{$row->id}}" @if($mark->student_id == $row->id) {{'selected'}}@endif>{{$row->name}}</option>
-									@endforeach
+									
+									<option value="{{$mark->student_id}}" >{{$mark->student->name}}</option>
+									
 								</select>
 							</div>		
 						</div>
@@ -42,9 +42,7 @@
 							<label for="subject_id">Subject</label>
 							<div>
 								<select class="form-control" name="subject_id" id="subject_id">
-									@foreach($subjects as $row)
-									<option value="{{$row->id}}" @if($mark->subject_id == $row->id) {{'selected'}}@endif>{{$row->name}}</option>
-									@endforeach
+									<option value="{{$mark->subject_id}}">{{$mark->subject->name}}</option>
 								</select>
 							</div>		
 						</div>
@@ -54,15 +52,7 @@
 
 							<div>
 								<select id="month" class="form-control" name="month">
-									<option value="june" @if($mark->month == "june") {{'selected'}}@endif>June</option>
-									<option value="july" @if($mark->month == "july") {{'selected'}}@endif>July</option>
-									<option value="august" @if($mark->month == "august") {{'selected'}}@endif>August</option>
-									<option value="september" @if($mark->month == "september") {{'selected'}}@endif>September</option>
-									<option value="october" @if($mark->month == "october") {{'selected'}}@endif>October</option>
-									<option value="november" @if($mark->month == "november") {{'selected'}}@endif>November</option>
-									<option value="december" @if($mark->month == "december") {{'selected'}}@endif>December</option>
-									<option value="january" @if($mark->month == "january") {{'selected'}}@endif>January</option>
-									<option value="february" @if($mark->month == "february") {{'selected'}}@endif>February</option>
+									<option value="{{$mark->month}}">{{$mark->month}}</option>
 								</select>
 
 							</div>

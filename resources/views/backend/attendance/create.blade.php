@@ -164,7 +164,7 @@
    									
    									
    										if(v.id==cbox){
-   											alert("Ok");
+   											// alert("Ok");
    										v.description=vdes;
    										
    									}

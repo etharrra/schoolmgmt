@@ -8,6 +8,7 @@ use App\Room;
 use App\User;
 use App\Grade;
 use App\Guardian;
+use App\Attendance;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -92,7 +93,137 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $guardian = Guardian::where('user_id','=',$student->user->id)->get();
-        return view('backend.student.show',compact('student','guardian'));
+
+        $grade_subject = DB::table('students')
+                        ->join('rooms','students.room_id','=','rooms.id')
+                        ->join('grades','grades.id','=','rooms.grade_id')
+                        ->join('grade_subject','grades.id','=','grade_subject.grade_id')
+                        ->join('subjects','subjects.id','=','grade_subject.subject_id')
+                        ->where('students.id','=',$id)
+                        ->select('subjects.*','subjects.name as subjectname')
+                        ->get();
+
+        $student_mark_june = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'june');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get();
+
+        $student_mark_july = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'july');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get();
+
+        $student_mark_august = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'august');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get();
+
+        $student_mark_september = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'september');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get();
+
+        $student_mark_october = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'october');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get();
+
+        $student_mark_november = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'november');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get();
+
+        $student_mark_december = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'december');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get();
+
+        $student_mark_january = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'january');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get();
+
+        $student_mark_february = DB::table('marks')
+                        ->join('students','marks.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->where('month', '=', 'february');
+                        })
+                        ->select('marks.*','marks.mark as mark','marks.month as month')
+                        ->orderBy('marks.subject_id', 'asc')
+                        ->get(); 
+
+               
+            $fullattendance =DB::table('attendances')
+                        ->join('students','attendances.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->whereMonth('date','06');
+                        })
+                        ->get();
+            $fullattendance = count($fullattendance);            
+
+            $presentattendance = DB::table('attendances')
+                        ->join('students','attendances.student_id','=','students.id')
+                        ->where('students.id','=',$id)
+                        ->where(function ($query) {
+                           $query->whereMonth('date','06')
+                                ->where('status', '=', 'present');;
+                        })
+                        ->get();
+            $presentattendance = count($presentattendance); 
+            // dd($attendance);
+            // dd($presentattendance,$fullattendance); 
+            $persent = floor(1 * $presentattendance / $fullattendance * 100);
+            
+            // dd($persent);           
+        /*foreach ($student as $key => $value) {
+            echo  $value->attendance->date;
+        } */                   
+        // dd($grade_subject); 
+        // dd($student_mark_june);             
+
+        return view('backend.student.show',compact('student','guardian','grade_subject','student_mark_june','student_mark_july','student_mark_august','student_mark_september','student_mark_october','student_mark_november','student_mark_december','student_mark_january','student_mark_february','persent'));
     }
 
     /**

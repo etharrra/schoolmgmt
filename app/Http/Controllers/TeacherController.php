@@ -9,6 +9,7 @@ use App\User;
 use App\Room;
 use App\Grade;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Resources\RoomResource;
 
 class TeacherController extends Controller
 {
@@ -102,8 +103,22 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $teacher = Teacher::findOrFail($id);
-        return response()->json($teacher);
+        //dd($id);
+       $teacher = Teacher::findOrFail($id);
+       $room=$teacher->rooms()->get();
+       $rooms = RoomResource::collection($room);
+
+                     
+     
+        
+        // dd($rooms);
+       
+        // dd($grade_teacher);
+        // return response()->json([
+        //     'teacher' =>  $teacher,
+        //     'room' => $rooms
+        // ]);
+       return view('backend.teacher.show',compact('teacher','rooms'));
     }
 
     /**
