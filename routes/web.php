@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('frontendtemplate');
+// });
 
 Route::group([
 	//'name' => 'backend.',
@@ -50,7 +50,7 @@ Route::group([
 	
 });
 
-Route::get('/','FrontendController@index');
+Route::get('/index','FrontendController@index')->name('index');
 
 Auth::routes();
 
@@ -68,3 +68,5 @@ Route::get('/gradestudent/{id}','AjaxController@gradestudent')->name('gradestude
 Route::get('/getsubject/{id}','AjaxController@getsubject')->name('getsubject');
 
 Route::get('/roomdetail/{id}','AjaxController@roomdetail')->name('roomdetail');
+
+// Route::get('/dateAttendance/{roomid}/{date}','AjaxController@dateAttendance')->name('dateAttendance');

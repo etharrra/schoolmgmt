@@ -106,7 +106,7 @@
                 <thead class="bg-success">
                   <tr>
                     <th>Month</th>
-                    @foreach($grade_subject as $value)
+                    @foreach($room_subject as $value)
                     <th>{{$value->subjectname}}</th>
                     @endforeach
                      <th>Total</th>
@@ -218,7 +218,7 @@
                 <tfoot class="bg-success">
                   <tr>
                     <th>Month</th>
-                    @foreach($grade_subject as $value)
+                    @foreach($room_subject as $value)
                     <th>{{$value->subjectname}}</th>
                     @endforeach
                     <th>Total</th>

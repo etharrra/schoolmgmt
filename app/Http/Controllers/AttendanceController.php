@@ -18,8 +18,9 @@ class AttendanceController extends Controller
 
     public function index()
     {
+        $grade = Grade::all();
         $attendance = Attendance::all();
-        return view('backend.attendance.index',compact('attendance'));
+        return view('backend.attendance.index',compact('attendance','grade'));
     }
 
     /**

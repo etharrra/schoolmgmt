@@ -45,7 +45,7 @@
             <a class="nav-link" href="" style="font-size: 20px;color: white;">Contact</a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="" style="font-size: 20px;color: white;">login</a>
+            <a class="nav-link" href="{{route('login')}}" style="font-size: 20px;color: white;">login</a>
           </li>
         </ul>
       </div>
