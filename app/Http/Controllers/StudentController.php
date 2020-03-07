@@ -94,14 +94,14 @@ class StudentController extends Controller
         $student = Student::find($id);
         $guardian = Guardian::where('user_id','=',$student->user->id)->get();
 
-        $grade_subject = DB::table('students')
-                        ->join('rooms','students.room_id','=','rooms.id')
-                        ->join('grades','grades.id','=','rooms.grade_id')
-                        ->join('grade_subject','grades.id','=','grade_subject.grade_id')
-                        ->join('subjects','subjects.id','=','grade_subject.subject_id')
+        $room_subject = DB::table('students')
+                        ->join('room_teacher','students.room_id','=','room_teacher.room_id')
+                        ->join('teachers','room_teacher.teacher_id','=','teachers.id')
+                        ->join('subjects','teachers.subject_id','=','subjects.id')
                         ->where('students.id','=',$id)
                         ->select('subjects.*','subjects.name as subjectname')
                         ->get();
+        // dd($room_subject);
 
         $student_mark_june = DB::table('marks')
                         ->join('students','marks.student_id','=','students.id')
@@ -223,7 +223,7 @@ class StudentController extends Controller
         // dd($grade_subject); 
         // dd($student_mark_june);             
 
-        return view('backend.student.show',compact('student','guardian','grade_subject','student_mark_june','student_mark_july','student_mark_august','student_mark_september','student_mark_october','student_mark_november','student_mark_december','student_mark_january','student_mark_february','persent'));
+        return view('backend.student.show',compact('student','guardian','room_subject','student_mark_june','student_mark_july','student_mark_august','student_mark_september','student_mark_october','student_mark_november','student_mark_december','student_mark_january','student_mark_february','persent'));
     }
 
     /**

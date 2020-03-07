@@ -42,10 +42,12 @@
             <a class="nav-link" href="#" style="font-size: 20px;color: white;">Teachers</a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="" style="font-size: 20px;color: white;">Contact</a>
+            <a class="nav-link" href="#" style="font-size: 20px;color: white;">Contact</a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="#" style="font-size: 20px;color: white;">login</a>
+
+            <a class="nav-link" href="{{route('login')}}" style="font-size: 20px;color: white;">login</a>
+
           </li>
         </ul>
       </div>
@@ -118,24 +120,26 @@
 
 
  <div id="models">
-    <div class="container-fluid mt-5">
+    <div class="container mt-2">
       <div class="row">
         <div class="col-12">
           <h1 class="text-center" style="font-size: 60px;"> Our Teacher</h1>
           <p class="text-center">There are many tecahers in our school.Among them, they are our lovely class teacher.</p>
         </div>
       </div>
-      <!-- <div class="row mt-5 pt-5"> -->
-        <!-- <div class="col-lg-3 col-md-6 col-sm-12 mt-5 order-lg-1 order-md-1 order-sm-1"> -->
-          <!-- <div class="card img-fluid"> -->
-            <!-- <img class="card-img-top" src="img/gd.jpg" alt="Card image" style="width:100%"> -->
-            <!-- <div class="card-img-overlay"> -->
-              <!-- <h4 class="card-title px-3 py-1 text-center">G Dragon</h4> -->
-            <!-- </div> -->
-          <!-- </div> -->
-        <!-- </div> -->
-      <!-- </div> -->
-    <!-- </div> -->
+      <div class="row mt-3 pt-3">
+        @foreach($teacherd as $value )
+        <div class="col-lg-4 col-md-4 col-sm-12 mt-5 order-lg-1 order-md-1 order-sm-1">
+          <div class="card img-fluid">
+            <img class="card-img-top img-fluid" src="{{asset($value->avatar)}}" alt="Card image" style="width:100%">
+            <div class="">
+              <h4 class="card-title px-3 py-1 text-center">{{$value->user->name}}</h4>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+    </div>
   </div>
 
 
@@ -144,16 +148,16 @@
     <div class="container">
       <div class="row text-white">
         <div class="col-lg-4 col-md-12 col-sm-12">
-          <h1>200</h1>
+          <h1>{{$student}}</h1>
           <p>Students</p>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
-          <h1>50</h1>
+          <h1>{{$teacher}}</h1>
           <p>Teacher</p>
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
-          <h1>100</h1>
-          <p>Teacher</p>
+          <h1>10</h1>
+          <p>Awards</p>
         </div>
       </div>
     </div>
@@ -246,11 +250,6 @@
   </div>
 
 
-
-
-
-@yield('content')
-
 <div id="footer" class="mt-5">
     <div class="container-fluid" style="background-color: lightgreen;">
       <div class="row">
@@ -327,4 +326,14 @@
         </div>
       </footer>
 </body>
+<script type="text/javascript">
+  $(document).ready(function() {
+    
+        $.get('studentcount', 
+          function(res) {
+          console.log(res);
+        });
+    
+  });
+</script>
 </html>

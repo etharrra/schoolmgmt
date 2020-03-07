@@ -105,5 +105,13 @@ class AjaxController extends Controller
         return view('backend.room.detail',compact('roomteacher','roomstudent','room','grade'));
                         
     }
+
+    // public function dateAttendance(Request $roomid, $date)
+    // {
+    //     $roomid = request('roomid');
+    //     $date = request('date');
+    //     dd($roomid ,$date);
+    // }
+    
     
 }

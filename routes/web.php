@@ -11,13 +11,19 @@
 |
 */
 
+
 Route::get('/', function () {
-    return view('index');
+    return view('frontendtemplate');
 });
+
+// Route::get('/', function () {
+//     return view('frontendtemplate');
+// });
+
 
 Route::group([
 	//'name' => 'backend.',
-	// 'middleware' => 'auth',
+	'middleware' => 'auth',
 	'prefix' => 'backend'
 	//'namespace' => 'Backend'
 
@@ -50,7 +56,7 @@ Route::group([
 	
 });
 
-Route::get('/','FrontendController@index');
+Route::get('/','FrontendController@index')->name('index');
 
 Auth::routes();
 
@@ -69,6 +75,15 @@ Route::get('/getsubject/{id}','AjaxController@getsubject')->name('getsubject');
 
 Route::get('/roomdetail/{id}','AjaxController@roomdetail')->name('roomdetail');
 
+Route::get('studentcount','FrontendController@studentcount')->name('studentcount');
+
+Route::get('teachercount','FrontendController@teachercount')->name('teachercount');
+
+Route::get('allteacher','FrontendController@allteacher')->name('allteacher');
+
 Route::resource('contact','ContactController');
 
 Route::get('/parents','ParentController@index');
+
+// Route::get('/dateAttendance/{roomid}/{date}','AjaxController@dateAttendance')->name('dateAttendance');
+
