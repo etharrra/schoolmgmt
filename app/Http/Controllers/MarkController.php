@@ -42,21 +42,33 @@ class MarkController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         // Validation
-        $request->validate([
+        /*$request->validate([
             "mark" => 'required|min:1|max:191',
             "student_id" => 'required',
             "subject_id" => 'required',
             "month" => 'required'
-        ]);
+        ]);*/
+        $student_mark = request('mymark');
+        // dd($student_mark);
+        foreach ($student_mark as $key => $value) {
+               // dd($value);
+                $month = request('month');
+                $subject = request('subject');
+                // dd($subject);
+                $mark = new Mark;
+                $mark->month = $month;
+                $mark->subject_id = $subject;
+                $studentmark=$value['mark'];
+                $mark->student_id = $value['id'];
+                $mark->mark = $studentmark;
 
-        $mark = new Mark;
-        $mark->mark = request('mark');
-        $mark->student_id = request('student_id');
-        $mark->subject_id = request('subject_id');
-        $mark->month = request('month');
-        $mark->save();
+              
+          $mark->save();
+            
+            
+        }
 
         return redirect()->route('mark.index');
     }

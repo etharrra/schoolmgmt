@@ -50,9 +50,7 @@
 
 					<div class="form-group">								
 						<select class="form-control" name="student" id="student">
-							@foreach($students as $row)
-								<option value="{{$row->id}}" @if($attendance->student_id == $row->id) {{'selected'}}@endif>{{$row->name}}</option>
-							@endforeach
+							<option value="{{$attendance->student_id}}">{{$attendance->student->name}}</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -84,67 +82,7 @@
 
 @section('script')
 <script type="text/javascript">
-	$(document).ready(function() {
-		 $('#dinput').hide();
-		$.ajaxSetup({
-			headers: {
-				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			}
-		});
-		$('.js-example-basic-multiple').select2();
-		$('#grade').change(
-			function() {
-
-				var id = $( 'option:selected', this ).data( 'id' );
-			//alert(id);
-			$.get('/getroom/'+id, function(res) {
-				$room = res;
-				var html;
-				$.each($room, function(i, v) {
-					//console.log(v.name);
-					//console.log(v.id);
-					var rname = v.name;
-					var rid = v.id;
-					html += `
-					<option value="${v.id}" data-id="${v.id}">${v.name}</option>`;
-
-				});
-				$('#room').html(html);
-
-			});
-		});
-
-		$('#room').change(
-			function() {
-
-				var id = $( 'option:selected', this ).data( 'id' );
-			//alert(id);
-			$.get('/getstudent/'+id, function(res) {
-				$student = res;
-				var html;
-				$.each($student, function(i, v) {
-					//console.log(v.name);
-					//console.log(v.id);
-					var rname = v.name;
-					var rid = v.id;
-					html += `
-					<option value="${v.id}" data-id="${v.id}">${v.name}</option>`;
-
-				});
-				$('#student').html(html);
-
-			});
-		}); 
-	var description = $('#description').val();	
-		
-	$('#present').click(
-   		function(event) {
-   	});
-   	$('#absent').click(
-   		function(event) {
-   			$('#dinput').show();
-   	});
-	});
+	
 </script>
 
 @endsection

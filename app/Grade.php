@@ -18,5 +18,10 @@ class Grade extends Model
 	{
 		return $this->belongsToMany('App\Subject')
     				->withTimestamps();
+	}
+
+	public function rooms($value='')
+	{
+		return $this->hasMany('App\Room');
 	}						
 }

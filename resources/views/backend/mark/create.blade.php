@@ -60,8 +60,8 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="subject_id">Select Subject</label>
-								<select name="subject_id" id="subject_id" class="form-control">
+								<label for="subject">Select Subject</label>
+								<select name="subject" id="subject" class="form-control">
 
 								</select>	
 							</div>	
@@ -117,7 +117,7 @@
    					html += `<option value="${sid}">${sname}</option>`;
 
    				});
-   				$('#subject_id').html(html);
+   				$('#subject').html(html);
    			});
    		});
     	$('#room').change(
@@ -156,28 +156,65 @@
 			   					<label class="form-check-label text-success" for="${i++}">
 			   					${stname}
 			   					</label>
-			   					<input type="hidden" class="hi${o++}" value=${stid} name="student_id">
+			   					
 			   				</div>
 			   				<div class="col-8">
-			   					<input type="text" name="mark" class="form-control mark" id="${n++}">
+			   					<input type="text" name="mark" class="form-control mark" id="${n++}" data-stduentid="${stid}">
 		   					</div>
 	   					</div>
    					</li>`;
    					var studentid = $('.hi'+stid).val();
    				});
    				$('#student_list').html(html);
-   				$('.mark').focus(
-   					function() {
-   						var studentid = $('.hi'+o).val();
-   						console.log(studentid);
-   				});
-   				$('.mark').change(
-   					function() {
+   				
+   				$('.mark').change(function(e){
+
+   						e.preventDefault();
+
+   						var studentid = $(this).data('stduentid');
+   						var markvalue = $(this).val();
+   						// var o =0;
+   						// var studentid=$(".hi"+o).val();
+   						// console.log(studentid);
+   						// console.log(markvalue);
+   						var mark = localStorage.getItem("mymark");
+   								var mymark=JSON.parse(mark);
+   								$.each(mymark, function(i, v) {
+   									
+   									
+   										if(v.id==studentid){
+   											// alert("Ok");
+   										v.mark=markvalue;
+   										
+   									}
+   								});	
+   								mark = JSON.stringify(mymark);
+								localStorage.setItem("mymark", mark);
    					
    				}); 							
 
    			});
    		});
+    	$("form").submit(function(e){
+	    		e.preventDefault();
+	   		//alert("OK");
+	   		$.ajaxSetup({
+	   			headers: {
+	   				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	   			}
+	   		});
+	   		var month = $('#month').val();
+	   		var subject = $('#subject').val();
+	   		var mark = localStorage.getItem("mymark");
+	   		var mymark = JSON.parse(mark);
+	   		$.post('/backend/mark/', {month:month,mymark:mymark,subject:subject}, 
+	   			function(response) {
+	   				if (response) {
+	   					alert("Successfully!");
+	   					localStorage.clear();
+	   				}
+	   			});
+	   	});
     
 });
 </script>

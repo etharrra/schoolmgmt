@@ -24,6 +24,7 @@
 				@endforeach
 			</ul>
 			<div class="tab-content" id="pills-tabContent">
+
 				<div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -38,7 +39,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@php $i = 1; @endphp
+								@php $i = 1 @endphp
 								@foreach($students as $row)
 
 										<tr>
@@ -82,10 +83,11 @@
 						</table>
 					</div>
 				</div>
+
 				@foreach($grades as $row)
 				<div class="tab-pane fade" id="pills-home{{$row->id}}" role="tabpanel" aria-labelledby="pills-home-tab{{$row->id}}">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<table class="table table-bordered" id="dataTables" width="100%" cellspacing="0">
 							<thead>
 								<tr>
 									<th class="text-center">No</th>
@@ -96,11 +98,8 @@
 									<th class="text-right">Actions</th>
 								</tr>
 							</thead>
-							<tbody id="tbody">
-								
-								
-								
-						
+							<tbody>
+
 							</tbody>
 
 							<tfoot>
@@ -140,7 +139,7 @@
         		function(res) {
         			console.log(res);
         			var gradestudent = res;
-        			var html = ''; var i = 1;
+        			var html = ''; var i =1;
         			$.each(gradestudent, function(i, v) {
         				// console.log(v.id);
         				// console.log(v.sname);
@@ -151,6 +150,7 @@
         				var routedestroy = "{{route('student.destroy',':id')}}";
         					routedestroy = routedestroy.replace(':id',v.id);	 	
         				var id = v.id;
+        				//console.log(v.name);
         				html += `<tr>
 									<td class="text-center">${i++}</td>
 									<td>${v.sname}</td>
@@ -173,8 +173,9 @@
 										</form>
 									</td>
 								</tr>`;
+								
         			});
-        			$('#tbody').html(html);
+        			$('tbody').html(html);        			
         	});
         });
 	});

@@ -8,6 +8,7 @@ use App\Room;
 use App\Student;
 use App\User;
 use App\Subject;
+use App\Teacher;
 use Illuminate\Support\Facades\DB;
 
 
@@ -104,4 +105,5 @@ class AjaxController extends Controller
         return view('backend.room.detail',compact('roomteacher','roomstudent','room','grade'));
                         
     }
+    
 }

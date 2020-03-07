@@ -21,5 +21,9 @@ class Student extends Model
 	public function user($value='')
 	{
 		return $this->belongsTo('App\User');
+	}
+	public function attendance($value='')
+	{
+		return $this->hasMany('App\Attendance');
 	}					   
 }
