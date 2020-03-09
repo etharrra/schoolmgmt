@@ -76,7 +76,7 @@
                     @endphp
                     @endforeach
                     <td>{{$total}}</td>
-                    <td>{{$persent}}%</td>
+                    <td>{{$persentjune}}%</td>
                   </tr>
                   <tr>
                     <th>July</th>

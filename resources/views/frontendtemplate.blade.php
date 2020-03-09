@@ -33,19 +33,46 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active px-3">
-            <a class="nav-link" href="" style="font-size: 20px;color: white;">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#" style="font-size: 20px;color: white;">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="" style="font-size: 20px;color: white;">About</a>
+            <a class="nav-link" href="#" style="font-size: 20px;color: white;">About</a>
           </li>
           <li class="nav-item px-3">
             <a class="nav-link" href="#" style="font-size: 20px;color: white;">Teachers</a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="" style="font-size: 20px;color: white;">Contact</a>
+            <a class="nav-link" href="#" style="font-size: 20px;color: white;">Contact</a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="{{route('login')}}" style="font-size: 20px;color: white;">login</a>
+
+           <ul class="navbar-nav ml-auto">
+              <!-- Authentication Links -->
+              @guest
+                  <li class="nav-item">
+                      <a class="nav-link" style="font-size: 20px;color: white;" href="{{ route('login') }}">{{ __('Login') }}</a>
+                  </li>
+              @else
+                  <li class="nav-item">
+                      <a style="font-size: 20px;color: white;" id="navbarDropdown" class="nav-link" href="{{route('parents')}}" role="button">
+                          {{ Auth::user()->name }} <span class="caret"></span>
+                      </a>
+
+                      <div style="font-size: 20px;color: white;" class="" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ route('logout') }}"
+                             onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                              {{ __('Logout') }}
+                          </a>
+
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              @csrf
+                          </form>
+                      </div>
+                  </li>
+              @endguest
+          </ul>
+
           </li>
         </ul>
       </div>
@@ -67,159 +94,114 @@
         </div>
       </div>
     </div>
-
   </div>
 
-  <div class="container mt-5">
+ <div class="container mt-5">
     <div class="row" id="subcard">
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <span class="fa-stack fa-3x" style="color: lightgreen">
-          <i class="fas fa-circle fa-stack-2x"></i>
-          <i class="fas fa-check-square fa-stack-1x fa-inverse"></i>
-        </span>
-        <div class="mt-3">
-          <h3>Attendance Record Just in A Few Clicks</h3>
-          <p>Recording and reviewing students’ attendance record is just one of the main features of school management system. The system allows you to create various attendance report per class, student, gender, and many other variables for the whole term.  
-          </p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <span class="fa-stack fa-3x" style="color: lightgreen">
-          <i class="fas fa-circle fa-stack-2x"></i>
-          <i class="fas fa-book-open fa-stack-1x fa-inverse"></i>
-        </span>
-        <div class="mt-3">
-          <h3>Better Exam Management</h3>
-          <p>Teachers can hold the exams within the platform or outside the platform. If the exams is not in the system, teachers can grade and post the result in the  system. It also provides report generation which calculate all aspects of grading automatically.
-          </p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-12" style="">
-        <span class="fa-stack fa-3x" style="color: lightgreen;">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card">
+        <span class="fa-stack fa-3x" style="color: lightgreen;margin-left:110px;">
           <i class="fas fa-circle fa-stack-2x"></i>
           <i class="fas fa-user-graduate fa-stack-1x fa-inverse"></i>
         </span>
-        <div class="mt-3">
-          <h3 style="font-family: roboto;">Help Students Admission</h3>
-          <p>The students have their personal information and their academic records in the future in one data base. They can access it any time, even after they graduate. Additionally, the system minimizes mistakes due to human error, lost or duplicated documents.
+        <div class="card-body mt-3">
+          <h3>Experience Teachers</h3>
+          <p> Teachers participating in teacher education, this study examined associations between classroom management practices, teaching experience, and teachers’ beliefs.Teaching experience was positively related to self-efficacy and beliefs in constructivism but did not impact practices. 
           </p>
         </div>
+        </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <span class="fa-stack fa-3x" style="color: lightgreen">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card">
+        <span class="fa-stack fa-3x" style="color: lightgreen;margin-left:110px;">
           <i class="fas fa-circle fa-stack-2x"></i>
-          <i class="fas fa-hands-helping fa-stack-1x fa-inverse"></i>
+          <i class="fas fa-chalkboard-teacher fa-stack-1x fa-inverse"></i>
         </span>
-        <div class="mt-3">
-          <h3>Effective Communication</h3>
-          <p>
-           This system have a feature that connects parents, students, teacher, and school admins.The information about recipients is already stored in the system so you don’t need to input it manually.
+        <div class="card-body mt-3">
+          <h3>Smart Classroom</h3>
+          <p>Smart Classrooms are technology enhanced classrooms that foster opportunities for teaching and learning by integrating learning technology, such as computers, specialized software, audience response technology, assistive listening devices, networking, and audio/visual capabilities.
           </p>
         </div>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <div id="counter">
-    <div class="container">
-      <div class="row text-white">
-        <div class="col-lg-4 col-md-12 col-sm-12">
-          <h1>200</h1>
-          <p>Students</p>
+      <div class="col-lg-4 col-md-4 col-sm-12" style="">
+        <div class="card">
+        <span class="fa-stack fa-3x" style="color: lightgreen;margin-left:110px;">
+          <i class="fas fa-circle fa-stack-2x"></i>
+          <i class="fas fa-book-open fa-stack-1x fa-inverse"></i>
+        </span>
+        <div class="card-body mt-3">
+          <h3 style="font-family: roboto;">Better Exam Management</h3>
+          <p>Teachers can hold the exams within the platform or outside the platform. If the exams is not in the system, teachers can grade and post the result in the  system. It also provides report generation which calculate all aspects of grading automatically.
+          </p>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
-          <h1>50</h1>
-          <p>Teacher</p>
-        </div>
-        <div class="col-lg-4 col-md-12 col-sm-12">
-          <h1>100</h1>
-          <p>Teacher</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="post" class="pb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-5 col-md-12 col-sm-12 order-lg-1 order-md-2 order-sm-2">
-          <img src="images/school.jpeg" class="img-fluid d-block w-100 h-100 mt-5">
-        </div>
-        <div class="col-lg-7 col-md-12 col-sm-12 order-lg-2 order-md-1 order-sm-1">
-          <div class="row pt-5">
-            <div class="col-12">
-              <h1>PERFECT IS PERFECT </h1>
-            </div>
-          </div>
-          <div class="row pt-5">
-            <div class="col-3 text-center" style="color: lightgreen;">
-              <i class="fas fa-user-circle fa-4x"></i>
-            </div>
-            <div class="col-9 text-left">
-              <h3>Teacher Love School</h3>
-              <p>
-                Make your classroom more effective by ensuring tailored learning  What is High Student to Teacher Ratios?  High student to teacher ratios to a phenomenon that would be familiar to most educators and parents. 
-              </p>
-            </div>
-          </div>
-          <div class="row pt-5">
-            <div class="col-3 text-center" style="color: lightgreen;">
-              <i class="fas fa-users fa-4x"></i>
-            </div>
-            <div class="col-9 text-left">
-              <h3>Students Is Everything</h3>
-              <p>
-                 Student Information System covers all the SIS features like admission, attendance, timetable, assignment, exams, reporting, etc.
-              </p>
-            </div>
-          </div>
-          <div class="row pt-5">
-            <div class="col-3 text-center" style="color: lightgreen;">
-              <i class="fas fa-user-circle fa-4x"></i>
-            </div>
-            <div class="col-9 text-left">
-              <h3>Parents Can Access It</h3>
-              <p>
-                The school management system connects school and parents directly.This information is available at any time, from the students’ performance to their on-going projects. So, parents and school share the same responsibility in educating their children.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div id="models">
-    <div class="container-fluid mt-5">
+
+
+
+ <div id="models">
+    <div class="container mt-2">
       <div class="row">
         <div class="col-12">
           <h1 class="text-center" style="font-size: 60px;"> Our Teacher</h1>
           <p class="text-center">There are many tecahers in our school.Among them, they are our lovely class teacher.</p>
         </div>
       </div>
-      <!-- <div class="row mt-5 pt-5"> -->
-        <!-- <div class="col-lg-3 col-md-6 col-sm-12 mt-5 order-lg-1 order-md-1 order-sm-1"> -->
-          <!-- <div class="card img-fluid"> -->
-            <!-- <img class="card-img-top" src="img/gd.jpg" alt="Card image" style="width:100%"> -->
-            <!-- <div class="card-img-overlay"> -->
-              <!-- <h4 class="card-title px-3 py-1 text-center">G Dragon</h4> -->
-            <!-- </div> -->
-          <!-- </div> -->
-        <!-- </div> -->
-      <!-- </div> -->
-    <!-- </div> -->
+      <div class="row mt-3 pt-3">
+        @foreach($teacherd as $value )
+        <div class="col-lg-4 col-md-4 col-sm-12 mt-5 order-lg-1 order-md-1 order-sm-1">
+          <div class="card img-fluid">
+            <img class="card-img-top img-fluid" src="{{asset($value->avatar)}}" alt="Card image" style="width:100%">
+            <div class="">
+              <h4 class="card-title px-3 py-1 text-center">{{$value->user->name}}</h4>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+    </div>
   </div>
 
-  <div class="container" id="contact">
+
+
+  <div id="counter">
+    <div class="container">
+      <div class="row text-white">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <h1>{{$student}}</h1>
+          <p>Students</p>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <h1>{{$teacher}}</h1>
+          <p>Teacher</p>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <h1>10</h1>
+          <p>Awards</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="container" id="contact">
     <div class="container-fluid mt-5">
       <div class="row">
         <div class="col-12">
-          <h1>Contact Information</h1>
+          <h1 style="text-align: center;">Contact Information</h1>
         </div>
       </div>
-      <div class="row text-center">
+      <div class="row text-center mt-2">
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card">
+            <span class="fa-stack fa-1x" style="color: lightgreen;margin-left: 150px;margin-top:10px;" >
+            <i class="fas fa-map-marker-alt fa-stack-2x" ></i>
+            </span>
             <div class="card-body">
               <h5>Address</h5>
               <p>No.222,Yangon</p>
@@ -228,6 +210,9 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card">
+            <span class="fa-stack fa-1x" style="color: lightgreen;margin-left: 150px;margin-top:10px;">
+            <i class="fas fa-phone-volume fa-stack-2x"></i>
+            </span>
             <div class="card-body">
               <h5>Phone</h5>
               <p>+959450042974</p>
@@ -236,6 +221,9 @@
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card">
+            <span class="fa-stack fa-1x" style="color: lightgreen;margin-left: 150px;margin-top:10px;">
+            <i class="fas fa-envelope-square fa-stack-2x"></i>
+            </span>
             <div class="card-body">
               <h5>Email</h5>
               <p>contact@vipmodelagency.com</p>
@@ -244,11 +232,18 @@
         </div>
       </div>
     </div>
-    <div id="contactForm">
+      <div id="contactForm">
       <div class="container-fluid mt-5">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+          @endif
         <div class="row">
+          
           <div class="col-lg-6 col-md-12 col-sm-12">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{route('contact.store')}}" method="post">
+              @csrf
               <div class="form-group">
                 <input type="text" name="name" placeholder="Your Name" class="form-control">
               </div>
@@ -256,14 +251,14 @@
                 <input type="email" name="email" placeholder="Your Email" class="form-control">
               </div>
               <div class="form-group">
-                <input type="text" name="subjet" placeholder="Subject" class="form-control">
+                <input type="text" name="subject" placeholder="Subject" class="form-control">
               </div>
               <div class="form-group">
-                <textarea class="form-control" rows="5" name="comment">Message</textarea>
+                <textarea class="form-control" rows="5" name="message" placeholder="Message"></textarea>
               </div>
               <br>
               <div class="mt-1 mb-2">
-                <a href="contact.html" class="btn btn-success" id="contactbtncontact">Contact</a>
+                <input type="submit" name="" value="Submit" class="btn btn-success">
               </div>
               <br>
             </form>
@@ -274,9 +269,13 @@
         </div>
       </div>
     </div>
+
+
+    </div>
   </div>
 
- <div id="footer" class="mt-5">
+
+<div id="footer" class="mt-5">
     <div class="container-fluid" style="background-color: lightgreen;">
       <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-12 p-5 text-dark">
@@ -306,10 +305,60 @@
           <h3>Conclusion</h3>
           <p>
             The school management system is important because it streamlines school administration with its feature. If you already use one, make sure that you have obtained the functions mentioned above.However, if you are not satisfied with your current system, you can get a free demo for school management system from Perfect Scho to see how our system works.
+
+
           </p>
         </div>
       </div>
     </div>
   </div>
+
+
+<br>
+ <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <ul class="list-inline text-center">
+                <li class="list-inline-item">
+                  <a href="#">
+                    <span class="fa-stack fa-lg" style="color: lightgreen;">
+                      <i class="fas fa-circle fa-stack-2x"></i>
+                      <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <span class="fa-stack fa-lg" style="color: lightgreen;">
+                      <i class="fas fa-circle fa-stack-2x"></i>
+                      <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <span class="fa-stack fa-lg" style="color: lightgreen;">
+                      <i class="fas fa-circle fa-stack-2x"></i>
+                      <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <p class="copyright text-muted text-center">Copyright &copy; Perfect School </p>
+            </div>
+          </div>
+        </div>
+      </footer>
 </body>
+<script type="text/javascript">
+  $(document).ready(function() {
+    
+        $.get('studentcount', 
+          function(res) {
+          console.log(res);
+        });
+    
+  });
+</script>
 </html>

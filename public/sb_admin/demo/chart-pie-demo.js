@@ -5,9 +5,10 @@ Chart.defaults.global.defaultFontColor = '#858796';
 // Pie Chart Example
 $.ajax({
   type:'POST',
-  url:'getBestsubcategory.php',
+  url:'studentbygrade',
   success:function(response)
   {
+    // console.log(response);
     var subcategoryResult = JSON.parse(response);
     var labelOne = subcategoryResult[0].subcategory;
     var labelTwo = subcategoryResult[1].subcategory;

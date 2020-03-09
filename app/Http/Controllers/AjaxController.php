@@ -66,7 +66,7 @@ class AjaxController extends Controller
                         ->where('rooms.grade_id','=',$id)
                         ->select('students.*','students.name as sname','rooms.name as rname','users.name as uname')
                         ->get();
-         // dd($gradestudent);
+         //dd($gradestudent);
         return $gradestudent;
     }
 
@@ -106,11 +106,12 @@ class AjaxController extends Controller
                         
     }
 
-    public function dateAttendance(Request $roomid, $date)
-    {
-        $roomid = request('roomid');
-        $date = request('date');
-        dd($roomid ,$date);
-    }
+    // public function dateAttendance(Request $roomid, $date)
+    // {
+    //     $roomid = request('roomid');
+    //     $date = request('date');
+    //     dd($roomid ,$date);
+    // }
+    
     
 }

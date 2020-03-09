@@ -42,8 +42,7 @@ class MarkController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        // Validation
+
         /*$request->validate([
             "mark" => 'required|min:1|max:191',
             "student_id" => 'required',

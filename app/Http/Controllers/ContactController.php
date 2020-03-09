@@ -14,7 +14,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-         $contacts = Contact::all();
+        $contacts = Contact::all();
         return view('backend.contact.index',compact('contacts'));
     }
 
@@ -36,25 +36,23 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-          //dd($request);
+        // dd($request);
         $request->validate([
-            "yourname" => 'required',
-            "youremail" => 'required',
+            "name" => 'required',
+            "email" => 'required',
             "subject" => 'required',
             "message" => 'required'
         ]);
+        // dd($request);
 
-        dd($request);
-        // Store
         $contact = new Contact;
-        $contact->yourname = request('yourname');
-        $contact->youremail = request('youremail');
+        $contact->name = request('name');
+        $contact->email = request('email');
         $contact->subject = request('subject');
         $contact->message = request('message');
         $contact->save();
 
-
-         return redirect()->route('contact.index');
+        return back()->with('status','Successfully Send!');
     }
 
     /**

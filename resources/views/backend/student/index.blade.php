@@ -175,7 +175,9 @@
 								</tr>`;
 								
         			});
-        			$('tbody').html(html);        			
+
+        			$('tbody').html(html);
+
         	});
         });
 	});

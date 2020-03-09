@@ -97,11 +97,7 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request);
-
-         //validation
-
-        $request->validate([
+         $request->validate([
             "subject" => 'required|min:3|max:191',
             "grades" => 'required'
         ]);
@@ -113,16 +109,11 @@ class SubjectController extends Controller
         $subject = Subject::find($id);
         $subject->name = request('subject');
         $subject->save();
-     
-        foreach ($subject->grades as $key => $value) {
-            $v = $value->pivot->grade_id;
-             
-        }
-        dd($v);
-        //add_student_subject
-       $subject->grades()->updateExistingPivot($subject->grades->pivot,request('grades'));
 
-       
+        $subject->grades()->detach();
+        $subject->grades()->attach(request('grades'));
+
+         return redirect()->route('subject.index');      
     }
 
     /**

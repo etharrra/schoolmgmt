@@ -39,12 +39,12 @@
 							<div class="tab-content" id="nav-tabContent">
 								<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 									<img src="{{asset ($teacher->avatar)}}" class="img-fluid d-block" width="100px">
-									<input type="hidden" name="avatar" value="{{$teacher->avatar}}">
+									<input type="hidden" name="oldavatar" value="{{$teacher->avatar}}">
 								</div>
 								<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 									<div class="form-group">
 										<div class="mt-3">
-											<input type="file" id="avatar" name="newavatar" class="form-control-file">	
+											<input type="file" id="avatar" name="avatar" class="form-control-file">	
 										</div>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 						<select name="grade" id="grade" class="form-control">
 							<option selected=""><---Select Grade---></option>
 							@foreach($grades as $grade)
-							<option value="{{$grade->id}}" data-id="{{$grade->id}}">{{$grade->name}}</option>
+							<option value="{{$grade->id}}" data-id="{{$grade->id}}" >{{$grade->name}}</option>
 							@endforeach
 						</select>
 					</div>
@@ -113,10 +113,16 @@
 						</select>
 					</div>
 
-					<div class="form-group">								
+					<div class="form-group">
+							@php
+							$v = $teacher->rooms;
+							@endphp										
 						<select class="js-example-basic-multiple form-control" id="room" name="rooms[]" multiple="multiple">
 								@foreach($rooms as $row)
-								<option value="{{$row->id}}">{{$row->name}}</option>
+								<option value="{{$row->id}}" @foreach($v as $key=> $value)
+
+									@if($row->id==$value->pivot->room_id) {{"selected"}} @endif 
+									@endforeach>{{$row->name}}</option>
 								@endforeach
 						</select>
 					</div>

@@ -8,7 +8,7 @@
 					<h6 class="m-0 font-weight-bold text-primary">Room</h6>
 				</div>
 				<div class="col-2">
-					<a href="{{route('room.index')}}" class="btn btn-block btn-outline-success">Add New</a>
+					<a href="{{route('room.index')}}" class="btn btn-block btn-outline-success">Back</a>
 				</div>
 			</div>
 		</div>

@@ -28,7 +28,6 @@
 							<label for="academicyear_id">Select Grade</label>
 							@php
 							$v = $subject->grades;
-
 							@endphp								
 							<select class="js-example-basic-multiple form-control" name="grades[]" multiple="multiple">
 								@foreach($grades as $row)
@@ -36,7 +35,7 @@
 
 									@if($row->id==$value->pivot->grade_id) {{"selected"}} @endif 
 									@endforeach>{{$row->name}}</option>
-									@endforeach
+								@endforeach
 							</select>
 						</div>
 							<input type="submit" name="submit" value="Update" class="btn btn-primary">
