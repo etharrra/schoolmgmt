@@ -1,32 +1,17 @@
 @extends('parentstemplate')
 @section('content')
-
-<!-- Main Content -->
-  <div class="container pt-3">
-    <h4 style="font-color:black" class="text-center">Student Profile</h4>
-    <div class="row">
-      <div class="col-6">
-        <a href="contact.html">
-        <div class="card">
-          <img src="img/student13.jpeg" class="card-img-top mx-0" style="">
-          <div class="card-body text-center">
-            <h2>Name</h2>
-            <h2>Grade</h2>
-          </div>
+<div class="row justify-content-around d-flex flex-wrap">
+  @foreach($students as $value)
+  <div class="w-25">
+    <a href="{{route('parentsstudent',$value->id)}}">
+      <div class="card text-dark mb-3" style="max-width: 18rem;background-color: lightgreen;">
+        <div class="card-header">{{$value->name}}</div>
+        <div class="card-body">
+          <img src="{{asset($value->avatar)}}" class="card-img-top" style="object-fit: cover;" height="200px">
         </div>
-        </a>
       </div>
-      <div class="col-6">
-        <a href="contact.html">
-        <div class="card">
-          <img src="img/student13.jpeg" class="card-img-top mx-0" style="">
-          <div class="card-body text-center">
-            <h2>Name</h2>
-            <h2>Grade</h2>
-          </div>
-        </div>
-        </a>
-      </div>  
-    </div>
+    </a>
   </div>
+  @endforeach
+</div>
 @endsection

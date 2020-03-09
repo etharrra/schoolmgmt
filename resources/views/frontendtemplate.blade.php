@@ -46,7 +46,39 @@
           </li>
           <li class="nav-item px-3">
 
-            <a class="nav-link" href="{{route('login')}}" style="font-size: 20px;color: white;">login</a>
+           <ul class="navbar-nav ml-auto">
+              <!-- Authentication Links -->
+              @guest
+                  <li class="nav-item">
+                      <a class="nav-link" style="font-size: 20px;color: white;" href="{{ route('login') }}">{{ __('Login') }}</a>
+                  </li>
+              @else
+                  <li class="nav-item">
+                    @role('Guardian')
+                      <a style="font-size: 20px;color: white;" id="navbarDropdown" class="nav-link" href="{{route('parents')}}" role="button">
+                          {{ Auth::user()->name }} <span class="caret"></span>
+                      </a>
+                    @endrole
+                    @role('Admin')
+                      <a style="font-size: 20px;color: white;" id="navbarDropdown" class="nav-link" href="{{route('dashboard')}}" role="button">
+                          {{ Auth::user()->name }} <span class="caret"></span>
+                      </a>
+                    @endrole
+
+                      <div style="font-size: 20px;color: white;" class="" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ route('logout') }}"
+                             onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                              {{ __('Logout') }}
+                          </a>
+
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              @csrf
+                          </form>
+                      </div>
+                  </li>
+              @endguest
+          </ul>
 
           </li>
         </ul>

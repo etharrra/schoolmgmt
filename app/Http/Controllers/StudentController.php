@@ -194,16 +194,16 @@ class StudentController extends Controller
                         ->get(); 
 
                
-            $fullattendance =DB::table('attendances')
+            $fullattendancejune =DB::table('attendances')
                         ->join('students','attendances.student_id','=','students.id')
                         ->where('students.id','=',$id)
                         ->where(function ($query) {
                            $query->whereMonth('date','06');
                         })
                         ->get();
-            $fullattendance = count($fullattendance);            
+            $fullattendancejune = count($fullattendancejune);            
 
-            $presentattendance = DB::table('attendances')
+            $presentattendancejune = DB::table('attendances')
                         ->join('students','attendances.student_id','=','students.id')
                         ->where('students.id','=',$id)
                         ->where(function ($query) {
@@ -211,10 +211,10 @@ class StudentController extends Controller
                                 ->where('status', '=', 'present');;
                         })
                         ->get();
-            $presentattendance = count($presentattendance); 
+            $presentattendancejune = count($presentattendancejune); 
             // dd($attendance);
             // dd($presentattendance,$fullattendance); 
-            $persent = floor(1 * $presentattendance / $fullattendance * 100);
+            $persentjune = floor(1 * $presentattendancejune / $fullattendancejune * 100);
             
             // dd($persent);           
         /*foreach ($student as $key => $value) {
@@ -223,7 +223,7 @@ class StudentController extends Controller
         // dd($grade_subject); 
         // dd($student_mark_june);             
 
-        return view('backend.student.show',compact('student','guardian','room_subject','student_mark_june','student_mark_july','student_mark_august','student_mark_september','student_mark_october','student_mark_november','student_mark_december','student_mark_january','student_mark_february','persent'));
+        return view('backend.student.show',compact('student','guardian','room_subject','student_mark_june','student_mark_july','student_mark_august','student_mark_september','student_mark_october','student_mark_november','student_mark_december','student_mark_january','student_mark_february','persentjune'));
     }
 
     /**

@@ -16,19 +16,21 @@ Route::get('/', function () {
     return view('frontendtemplate');
 });
 
+
 // Route::get('/', function () {
 //     return view('frontendtemplate');
 // });
 
 
+
 Route::group([
 	//'name' => 'backend.',
-	'middleware' => 'auth',
+	'middleware' => 'role:Admin|Teacher',
 	'prefix' => 'backend'
 	//'namespace' => 'Backend'
 
 ], function() {
-	Route::get('dashboard','BackendController@dashboard');
+	Route::get('/dashboard','BackendController@dashboard')->name('dashboard');
 
 	Route::resource('academicyear','AcademicyearController');
 
@@ -40,7 +42,7 @@ Route::group([
 
 	Route::resource('subject','SubjectController');
 
-	Route::resource('teacher','TeacherController');
+	Route::resource('teacher','TeacherController')->middleware('role:Admin');
 
 	Route::resource('guardian','GuardianController');
 
@@ -52,6 +54,7 @@ Route::group([
 	
 	//Route::resource('contact','ContactController');
 
+	Route::get('studentbygrade','BackendController@studentbygrade')->name('studentbygrade');
 
 	
 });
@@ -60,7 +63,7 @@ Route::get('/','FrontendController@index')->name('index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/getroom/{id}','AjaxController@getroom')->name('getroom');
@@ -83,7 +86,20 @@ Route::get('allteacher','FrontendController@allteacher')->name('allteacher');
 
 Route::resource('contact','ContactController');
 
-Route::get('/parents','ParentController@index');
 
+
+
+Route::group([
+	//'name' => 'backend.',
+	'middleware' => 'role:Guardian',
+	// 'prefix' => 'backend'
+	//'namespace' => 'Backend'
+
+], function() {
+	Route::get('/parents','ParentController@index')->name('parents');
+	
+	Route::get('/parentsstudent/{id}','ParentController@parentsstudent')->name('parentsstudent');
+
+});	
 // Route::get('/dateAttendance/{roomid}/{date}','AjaxController@dateAttendance')->name('dateAttendance');
 

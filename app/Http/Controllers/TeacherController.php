@@ -145,8 +145,57 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // $request->validate([
+        //     "name" => 'required|min:3|max:191',
+        //     "avatar" => 'required|mimes:jpeg,jpg,png',
+        //     "email" => 'required',
+        //     "phone" => 'required|min:9|max:191',
+        //     "education" => 'required|min:3|max:191',
+        //     "address" => 'required|min:5|max:191',
+        //     "subject_id" => 'required',
+        //     "rooms" => 'required'
+        // ]);
+        // dd($request);
+
         // Redirect
-        return redirect()->route('teacher.index');
+         if ($request->hasfile('avatar')) {
+            $avatar = $request->file('avatar');
+            $upload_dir = public_path().'/storage/teacher/';
+            $name = time().'.'.$avatar->getClientOriginalExtension();
+            $avatar->move($upload_dir,$name);
+            $path = '/storage/teacher/'.$name;
+        }else{
+            $path = request('oldavatar');
+        }
+
+         //Store Data
+      
+
+        $teacher = Teacher::find($id);
+
+        //$teacher->user_id = $user->id;
+        $teacher->avatar = $path;
+        $teacher->phone = request('phone');
+        $teacher->education = request('education');
+        $teacher->address = request('address');
+        $teacher->subject_id = request('subject_id');
+        $teacher->save();
+
+        $teacher->rooms()->detach();
+        $teacher->rooms()->attach(request('rooms'));
+         $user = User::find($teacher->user_id);
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = Hash::make('12345678');
+        $user->save();
+
+        $user->assignRole('Teacher');
+
+        //$teacher->save();
+
+          return redirect()->route('teacher.index');
+
     }
 
     /**

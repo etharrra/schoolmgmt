@@ -12,94 +12,46 @@
             </div>
         </div>
       </div>
-        <div class="card-body">
-          <div class="container-fluid">
-            <div class="row"> 
-
-              <div class="col-6">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-row">
-                      <label class="form-control-label text-success">Name</label>
-                      <input class="form-control" type="" disabled="" name="" value="{{$student->name}}"><br><br>
-                    </div>
-                    
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-row">
-                      <label class="form-control-label text-success">Phone</label>
-                      <input class="form-control" type="" disabled="" name="" value="{{$student->phone}}"><br><br>
-                    </div>
-                    
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-row">
-                      <label class="form-control-label text-success">Address</label>
-                      <input class="form-control" type="" disabled="" name="" value="{{$student->address}}"><br><br>
-                    </div>
-                    
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-row">
-                      <label class="form-control-label text-success">Date of Birth</label>
-                      <input class="form-control" type="" disabled="" name="" value="{{$student->dob}}"><br><br>
-                    </div>
-                    
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="form-row">
-                      <label class="form-control-label text-success">Room</label>
-                      <input class="form-control" type="" disabled="" name="" value="{{$student->room->name}}"><br><br>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <div class="col-6">
-                  <img src="{{asset($student->avatar)}}" class="img-fluid rounded border-left-success" style="height: 350px; object-fit: cover;">
-              </div>
-
-            </div>
-
-            <div class="row mt-5">
-              <div class="col-12">
-                <h3 class="text-success text-center">Guardian Information</h3>
-              </div>
-              <div class="col-6">
-                <div class="form-row">
-                  <label class="form-control-label text-success">Name</label>
-                  <input class="form-control" type="" disabled="" name="" value="{{$student->user->name}}"><br><br>
-                </div>
-              </div>
-              <div class="col-6">
-                  <div class="form-row">
-                    <label class="form-control-label text-success">Email</label>
-                    <input class="form-control" type="" disabled="" name="" value="{{$student->user->email}}"><br><br>
-                  </div>
-              </div>
-               <div class="col-6">
-                  <div class="form-row">
-                      <label class="form-control-label text-success">Phone</label>
-                      <input class="form-control" type="" disabled="" name="" value="{{$guardian[0]['phone']}}"><br><br>
-                  </div>
-              </div>
-              <div class="col-6">
-                  <div class="form-row">
-                      <label class="form-control-label text-success">Address</label>
-                      <input class="form-control" type="" disabled="" name="" value="{{$guardian[0]['address']}}"><br><br>
-                  </div>
-              </div>
-            </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-6">
+              <table class="table table-borderless">
+              <tr>
+                <td>Name:</td>
+                <td>{{$student->name}}</td>
+              </tr>
+              <tr>
+                <td>Phone:</td>
+                <td>{{$student->phone}}</td>
+              </tr>
+              <tr>
+                <td>Address:</td>
+                <td>{{$student->address}}</td>
+              </tr>
+              <tr>
+                <td>Date of birth:</td>
+                <td>{{$student->dob}}</td>
+              </tr>
+              <tr>
+                <td>Guardian Name:</td>
+                <td>{{$student->user->name}}</td>
+              </tr>
+              <tr>
+                <td>Guardian Email:</td>
+                <td>{{$student->user->email}}</td>
+              </tr>
+              <tr>
+                <td>Guardian Address:</td>
+                <td>{{$guardian[0]['address']}}</td>
+              </tr>
+            </table>
           </div>
-
+          <div class="col-6">
+            <img src="{{asset($student->avatar)}}">
+          </div>
+        </div>
+      </div>
           <div class="container-fluid mt-5">
             <div class="table-responsive">
               <table class="table table-hover" id="dataTable">
@@ -124,7 +76,7 @@
                     @endphp
                     @endforeach
                     <td>{{$total}}</td>
-                    <td>{{$persent}}%</td>
+                    <td>{{$persentjune}}%</td>
                   </tr>
                   <tr>
                     <th>July</th>
