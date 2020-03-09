@@ -7,6 +7,10 @@ use App\Academicyear;
 
 class AcademicyearController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *

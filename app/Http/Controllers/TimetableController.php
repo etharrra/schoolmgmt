@@ -10,6 +10,10 @@ use App\Grade;
 
 class TimetableController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *

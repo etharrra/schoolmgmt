@@ -7,9 +7,18 @@ use App\Mark;
 use App\Student;
 use App\Subject;
 use App\Grade;
+use App\Teacher;
+use App\Room;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\RoomResource;
 
 class MarkController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin')->except('index','create','store');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,10 +37,25 @@ class MarkController extends Controller
      */
     public function create()
     {
-        $grades = Grade::all();
+        $userid = Auth::id();
+        $teacherfind =Teacher::where('user_id',$userid)->value('id');
+        //dd($teacherfind);
+        //$id=$teacherfind->id;
+        //dd($id);
+        $teacher = Teacher::find($teacherfind);
+        //dd($teacher);
+        $room=$teacher->rooms()->get();
+        // dd($room);
+        $rooms = RoomResource::collection($room);
+        // dd($rooms);  
+        // $grades = Grade::all();
         $students = Student::all();
-        $subjects = Subject::all();
-        return view('backend.mark.create',compact('students','subjects','grades'));
+
+        $subjectid = Teacher::where('user_id',$userid)->value('subject_id');
+        // dd($subjectid);
+        $subjects = Subject::where('id',$subjectid)->value('name');
+       // dd($subjects);
+        return view('backend.mark.create',compact('students','subjects','rooms','subjectid'));
     }
 
     /**

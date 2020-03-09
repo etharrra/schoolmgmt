@@ -31,12 +31,6 @@
 							<td>{{$row->name}}</td>
 							<td>{{$row->academicyear->academicyear}}</td>
 							<td class="td-actions text-right">
-								<!-- <button type="button" rel="tooltip" class="btn btn-info">
-									<i class="material-icons">search</i>
-								</button> -->
-								<a href="{{route('grade.show',$row->id)}}" class="btn btn-info detail">
-									<i class="fas fa-search"></i>
-								</a>
 								<a href="{{route('grade.edit',$row->id)}}" class="btn btn-success">
 									<i class="fas fa-edit"></i>
 								</a>

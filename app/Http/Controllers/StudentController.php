@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin')->except('index','show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -214,7 +218,12 @@ class StudentController extends Controller
             $presentattendancejune = count($presentattendancejune); 
             // dd($attendance);
             // dd($presentattendance,$fullattendance); 
-            $persentjune = floor(1 * $presentattendancejune / $fullattendancejune * 100);
+            if ($fullattendancejune == 0) {
+                $persentjune = "NO Attendance";
+            }else{
+                $persentjune = floor(1 * $presentattendancejune / $fullattendancejune * 100);
+            }
+            
             
             // dd($persent);           
         /*foreach ($student as $key => $value) {

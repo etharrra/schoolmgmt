@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class GuardianController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *

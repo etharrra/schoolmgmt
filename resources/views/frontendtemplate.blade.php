@@ -36,13 +36,13 @@
             <a class="nav-link" href="#" style="font-size: 20px;color: white;">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="#" style="font-size: 20px;color: white;">About</a>
+            <a class="nav-link" href="#about" style="font-size: 20px;color: white;">About</a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="#" style="font-size: 20px;color: white;">Teachers</a>
+            <a class="nav-link" href="#teacher" style="font-size: 20px;color: white;">Teachers</a>
           </li>
           <li class="nav-item px-3">
-            <a class="nav-link" href="#" style="font-size: 20px;color: white;">Contact</a>
+            <a class="nav-link" href="#contact" style="font-size: 20px;color: white;">Contact</a>
           </li>
           <li class="nav-item px-3">
 
@@ -103,7 +103,7 @@
     </div>
   </div>
 
- <div class="container mt-5">
+ <div class="container mt-5" id="about">
     <div class="row" id="subcard">
       <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="card">
@@ -151,7 +151,7 @@
 
 
 
- <div id="models">
+ <div id="teacher">
     <div class="container mt-2">
       <div class="row">
         <div class="col-12">
@@ -271,7 +271,7 @@
             </form>
           </div>
           <div class="col-lg-6 col-md-12 col-sm-12">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.997845334723!2d96.19027841418914!3d16.82646298841704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c193297684681d%3A0x888c780f8e06fd40!2sYangon%20International%20School!5e0!3m2!1sen!2smm!4v1582959667047!5m2!1sen!2smm" width="200" height="200" frameborder="0" style="border:0;" class="d-block" allowfullscreen=""></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3818.997845334723!2d96.19027841418914!3d16.82646298841704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c193297684681d%3A0x888c780f8e06fd40!2sYangon%20International%20School!5e0!3m2!1sen!2smm!4v1582959667047!5m2!1sen!2smm" width="100%" height="200" frameborder="0" style="border:0;" class="d-block" allowfullscreen=""></iframe>
           </div>
         </div>
       </div>

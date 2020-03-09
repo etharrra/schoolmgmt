@@ -48,7 +48,7 @@
             </table>
           </div>
           <div class="col-6">
-            <img src="{{asset($student->avatar)}}">
+            <img src="{{asset($student->avatar)}}" class="img-fluid d-block" style="height: 400px;object-fit: cover;">
           </div>
         </div>
       </div>

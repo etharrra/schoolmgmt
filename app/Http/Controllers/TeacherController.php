@@ -13,6 +13,10 @@ use App\Http\Resources\RoomResource;
 
 class TeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -105,12 +109,10 @@ class TeacherController extends Controller
     {
         //dd($id);
        $teacher = Teacher::findOrFail($id);
+      // dd($teacher);
        $room=$teacher->rooms()->get();
+      // dd($room);
        $rooms = RoomResource::collection($room);
-
-                     
-     
-        
         // dd($rooms);
        
         // dd($grade_teacher);

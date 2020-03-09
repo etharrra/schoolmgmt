@@ -9,6 +9,10 @@ use App\Grade;
 
 class SubjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *

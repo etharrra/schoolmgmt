@@ -45,8 +45,10 @@
 									<label for="grade">Select Grade</label>
 									<select name="grade" id="grade" class="form-control">
 										<option selected=""><---Select Grade---></option>
-											@foreach($grades as $grade)
-											<option value="{{$grade->id}}" data-id="{{$grade->id}}">{{$grade->name}}</option>
+											@php $v = $rooms @endphp
+											@foreach($v as $value)
+											<option value="{{$value->grade->id}}" data-id="{{$value->grade->id}}">{{$value->grade->name}}</option>
+											@break
 											@endforeach
 										</select>
 
@@ -62,7 +64,7 @@
 							<div class="form-group">
 								<label for="subject">Select Subject</label>
 								<select name="subject" id="subject" class="form-control">
-
+									<option value="{{$subjectid}}">{{$subjects}}</option>
 								</select>	
 							</div>	
 							<div class="form-group">					
@@ -117,7 +119,7 @@
    					html += `<option value="${sid}">${sname}</option>`;
 
    				});
-   				$('#subject').html(html);
+   				// $('#subject').html(html);
    			});
    		});
     	$('#room').change(
@@ -208,11 +210,13 @@
 	   		var subject = $('#subject').val();
 	   		var mark = localStorage.getItem("mymark");
 	   		var mymark = JSON.parse(mark);
+	   		var url = 
 	   		$.post('/backend/mark/', {month:month,mymark:mymark,subject:subject}, 
 	   			function(response) {
 	   				if (response) {
 	   					alert("Successfully!");
 	   					localStorage.clear();
+	   					// window.location.replace('mark/index');
 	   				}
 	   			});
 	   	});

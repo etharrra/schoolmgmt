@@ -25,7 +25,7 @@
 						<label for="date" class="col-form-label"> Date </label>
 
 						<div>
-							<input type="date" class="form-control" id="date"  name="date">
+							<input type="date" class="form-control" value="{{$date}}" readonly="" id="date"  name="date">
 
 						</div>
 					</div>

@@ -37,12 +37,6 @@
 							<td>{{$row->room->name}}</td>
 							<td>{{$row->subject->name}}</td>
 							<td class="td-actions text-right">
-								<!-- <button type="button" rel="tooltip" class="btn btn-info">
-									<i class="material-icons">search</i>
-								</button> -->
-								<a href="{{route('timetable.show',$row->id)}}" class="btn btn-info detail">
-									<i class="fas fa-search"></i>
-								</a>
 								<a href="{{route('timetable.edit',$row->id)}}" class="btn btn-success">
 									<i class="fas fa-edit"></i>
 								</a>

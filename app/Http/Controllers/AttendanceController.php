@@ -7,9 +7,14 @@ use App\Attendance;
 use App\Grade;
 use App\Room;
 use App\Student;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin')->except('index','create','store');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,10 +35,14 @@ class AttendanceController extends Controller
      */
     public function create()
     {
+        $userid = $id = Auth::id();
+        // dd($userid);
         $grades = Grade::all();
         $rooms = Room::all();
         $students = Student::all();
-        return view('backend.attendance.create',compact('grades','rooms','students'));
+        $date = date("Y-m-d");
+        // dd($date);
+        return view('backend.attendance.create',compact('grades','rooms','students','date'));
     }
 
     /**

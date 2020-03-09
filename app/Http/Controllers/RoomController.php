@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin')->except('index','show');
+    }
     /**
      * Display a listing of the resource.
      *
